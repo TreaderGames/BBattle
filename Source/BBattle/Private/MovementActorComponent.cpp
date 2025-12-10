@@ -54,13 +54,13 @@ void UMovementActorComponent::Move(FVector2d mouseWPos)
 
 void UMovementActorComponent::LookRotate(FVector forward)
 {
-	FRotator TargetRotation = UKismetMathLibrary::MakeRotFromX(forward);
-	TargetRotation.Pitch = 0.f;
-	TargetRotation.Roll = 0.f;
+	FRotator targetRotation = UKismetMathLibrary::MakeRotFromX(forward);
+	targetRotation.Pitch = 0.f;
+	targetRotation.Roll = 0.f;
 
 	if (controller)
 	{
-		controller->SetControlRotation(TargetRotation);
+		controller->SetControlRotation(targetRotation);
 	}
 }
 #pragma endregion
