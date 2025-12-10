@@ -49,5 +49,6 @@ void ABBotPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ABBotPlayerCharacter::Move(const FInputActionValue& value)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move");
 }
 
