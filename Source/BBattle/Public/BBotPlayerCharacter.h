@@ -36,4 +36,7 @@ protected:
 
 	void Move(const FInputActionValue& value);
 	FVector2d GetMouseWorldPos();
+
+private:
+	UWorld* worldPtr;
 };
