@@ -25,7 +25,4 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void Move(FVector2d mouseWPos);
-
-	UPROPERTY(EditAnywhere, Category = "Custom Components")
-	int speed;
 };
