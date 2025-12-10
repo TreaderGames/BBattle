@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputActionValue.h"
 #include "BBotPlayerCharacter.generated.h"
 
 UCLASS()
@@ -26,4 +27,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+protected:
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
+	class UInputMappingContext* inputMapping;
+
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
+	class UInputAction* moveIA;
+
+	void Move(const FInputActionValue& value);
 };

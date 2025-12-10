@@ -2,6 +2,9 @@
 
 
 #include "BBotPlayerCharacter.h"
+#include "InputMappingContext.h"
+#include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
 
 // Sets default values
 ABBotPlayerCharacter::ABBotPlayerCharacter()
@@ -30,5 +33,21 @@ void ABBotPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	if (APlayerController* playerController = Cast<APlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* subSystem = ULocalPlayer::GetSubsystem <UEnhancedInputLocalPlayerSubsystem>(playerController->GetLocalPlayer()))
+		{
+			subSystem->AddMappingContext(inputMapping, 0);
+		}
+	}
+
+	if (UEnhancedInputComponent* enhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		enhancedInputComponent->BindAction(moveIA, ETriggerEvent::Triggered, this, &ABBotPlayerCharacter::Move);
+	}
+}
+
+void ABBotPlayerCharacter::Move(const FInputActionValue& value)
+{
 }
 
