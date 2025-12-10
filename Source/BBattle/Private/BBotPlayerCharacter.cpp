@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "BBotPlayerCharacter.h"
 #include "InputMappingContext.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
-#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
-#include "Runtime/Engine/Classes/GameFramework/PlayerController.h"
+
+//Custom
 #include "UUtility.h"
+#include "MovementActorComponent.h"
+
 
 // Sets default values
 ABBotPlayerCharacter::ABBotPlayerCharacter()
@@ -15,6 +16,7 @@ ABBotPlayerCharacter::ABBotPlayerCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	movementComponent = CreateDefaultSubobject<UMovementActorComponent>(TEXT("MovementComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -54,11 +56,11 @@ void ABBotPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ABBotPlayerCharacter::Move(const FInputActionValue& value)
 {
-	float mouseX;
-	float mouseY;
 	FVector2d mousePos = UUtility::GetMouseToRayPosition(1000.0f, worldPtr); //GetMouseWorldPos();
-	UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetMousePosition(mouseX, mouseY);
 
-	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move "+ mousePos.ToString());
+	if (movementComponent != nullptr) {
+		movementComponent->Move(mousePos);
+	}
+	//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move "+ mousePos.ToString());
 }
 

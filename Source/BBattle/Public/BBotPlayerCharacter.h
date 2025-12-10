@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "MovementActorComponent.h"
 #include "BBotPlayerCharacter.generated.h"
+
 
 UCLASS()
 class BBATTLE_API ABBotPlayerCharacter : public ACharacter
@@ -35,7 +37,9 @@ protected:
 	class UInputAction* moveIA;
 
 	void Move(const FInputActionValue& value);
-	FVector2d GetMouseWorldPos();
+
+	UPROPERTY(EditAnywhere, Category = "Custom Component");
+	class UMovementActorComponent* movementComponent;
 
 private:
 	UWorld* worldPtr;
