@@ -35,4 +35,5 @@ protected:
 	class UInputAction* moveIA;
 
 	void Move(const FInputActionValue& value);
+	FVector2d GetMouseWorldPos();
 };

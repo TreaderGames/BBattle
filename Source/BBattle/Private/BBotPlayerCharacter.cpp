@@ -5,6 +5,8 @@
 #include "InputMappingContext.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Runtime/Engine/Classes/GameFramework/PlayerController.h"
 
 // Sets default values
 ABBotPlayerCharacter::ABBotPlayerCharacter()
@@ -49,6 +51,48 @@ void ABBotPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ABBotPlayerCharacter::Move(const FInputActionValue& value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move");
+	float mouseX;
+	float mouseY;
+	FVector2d mousePos = GetMouseWorldPos();
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetMousePosition(mouseX, mouseY);
+
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move "+ mousePos.ToString());
+}
+
+FVector2d ABBotPlayerCharacter::GetMouseWorldPos()
+{
+	float mouseX, mouseY;
+	FVector worldLocation;
+	FVector WorldDirection; 
+	FVector hitLocation;
+
+	if (APlayerController* playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0))
+	{
+		if (playerController->GetMousePosition(mouseX, mouseY))
+		{
+			// Converts the 2D mouse screen position to 3D world position and direction
+			if (playerController->DeprojectMousePositionToWorld(worldLocation, WorldDirection))
+			{
+				FHitResult hit;
+				FVector start = worldLocation;
+				FVector end = start + (WorldDirection * 10000.0f); // Trace 10,000 units along direction
+
+				if (GetWorld()->LineTraceSingleByChannel(hit, start, end, ECC_Visibility))
+				{
+					hitLocation = hit.Location; // Actual world space position under mouse
+
+					mouseX = hitLocation.X;
+					mouseY = hitLocation.Y;
+					// Use HitLocation for interactions or spawning
+				}
+			}
+		}
+	}
+
+	FVector2d mousePos;
+	mousePos.X = mouseX;
+	mousePos.Y = mouseY;
+
+	return mousePos;
 }
 
