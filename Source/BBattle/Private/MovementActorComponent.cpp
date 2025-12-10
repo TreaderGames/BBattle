@@ -2,6 +2,7 @@
 
 
 #include "MovementActorComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values for this component's properties
 UMovementActorComponent::UMovementActorComponent()
@@ -19,8 +20,7 @@ void UMovementActorComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	controller = CastChecked<APawn>(GetOwner())->GetController();
 }
 
 
@@ -35,5 +35,23 @@ void UMovementActorComponent::TickComponent(float DeltaTime, ELevelTick TickType
 void UMovementActorComponent::Move(FVector2d mouseWPos)
 {
 	GEngine->AddOnScreenDebugMessage(-2, 1, FColor::Blue, "UMovementActorComponent Move " + mouseWPos.ToString());
+	FVector mousePosition = FVector(mouseWPos.X, mouseWPos.Y, 0);
+
+	if (IsValid(controller))
+	{
+		FVector forwardDir = mousePosition - controller->GetPawn()->GetActorLocation();
+		//forwardDir.Normalize();
+
+		//GEngine->AddOnScreenDebugMessage(-3, 5, FColor::White, "Direction " + forwardDir.ToString());
+
+		FRotator TargetRotation = UKismetMathLibrary::MakeRotFromX(forwardDir);
+		TargetRotation.Pitch = 0.f;
+		TargetRotation.Roll = 0.f;
+
+		if (controller)
+		{
+			controller->SetControlRotation(TargetRotation);
+		}
+	}
 }
 

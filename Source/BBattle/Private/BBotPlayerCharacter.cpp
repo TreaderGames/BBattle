@@ -56,7 +56,7 @@ void ABBotPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ABBotPlayerCharacter::Move(const FInputActionValue& value)
 {
-	FVector2d mousePos = UUtility::GetMouseToRayPosition(1000.0f, worldPtr); //GetMouseWorldPos();
+	FVector2d mousePos = UUtility::GetMouseToRayPosition(10000.0f, worldPtr); //GetMouseWorldPos();
 
 	if (movementComponent != nullptr) {
 		movementComponent->Move(mousePos);

@@ -30,7 +30,7 @@ FVector2d UUtility::GetMouseToRayPosition(float rayScale, UWorld* world)
 				FHitResult hit;
 				FVector start = worldLocation;
 				FVector end = start + (WorldDirection * rayScale);
-
+				GEngine->AddOnScreenDebugMessage(-2, 1, FColor::Blue, "GetMouseToRayPosition start " + start.ToString());
 				if (world->LineTraceSingleByChannel(hit, start, end, ECC_Visibility))
 				{
 					hitLocation = hit.Location; // Actual world space position under mouse
