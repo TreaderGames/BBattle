@@ -21,12 +21,16 @@ protected:
 	virtual void BeginPlay() override;
 
 	void LookRotate(FVector forward);
+	void DoMove(FVector2D value);
 
 	AController* controller;
+	APawn* pawn;
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void Move(FVector2d mouseWPos);
+	void Move(FVector2D inputVector);
+
+	void Look(FVector2d inputVector);
 };

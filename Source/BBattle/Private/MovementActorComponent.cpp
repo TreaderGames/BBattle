@@ -21,7 +21,8 @@ void UMovementActorComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	controller = CastChecked<APawn>(GetOwner())->GetController();
+	pawn = CastChecked<APawn>(GetOwner());
+	controller = pawn->GetController();
 }
 
 
@@ -36,9 +37,17 @@ void UMovementActorComponent::TickComponent(float DeltaTime, ELevelTick TickType
 
 #pragma region Public
 
-void UMovementActorComponent::Move(FVector2d mouseWPos)
+void UMovementActorComponent::Move(FVector2D inputVector)
 {
-	//GEngine->AddOnScreenDebugMessage(-2, 1, FColor::Blue, "UMovementActorComponent Move " + mouseWPos.ToString());
+	if (IsValid(controller))
+	{
+		DoMove(inputVector);
+	}
+}
+
+void UMovementActorComponent::Look(FVector2d mouseWPos)
+{
+	GEngine->AddOnScreenDebugMessage(-2, 1, FColor::Blue, "UMovementActorComponent Move " + mouseWPos.ToString());
 	FVector mousePosition = FVector(mouseWPos.X, mouseWPos.Y, 0);
 
 	if (IsValid(controller))
@@ -62,6 +71,18 @@ void UMovementActorComponent::LookRotate(FVector forward)
 	{
 		controller->SetControlRotation(targetRotation);
 	}
+}
+
+void UMovementActorComponent::DoMove(FVector2D value)
+{
+	//const FRotator rotation = Controller->GetControlRotation();
+	//const FRotator yawRotation(0, rotation.Yaw, 0);
+	GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "value " + value.ToString());
+	const FVector forwardDir = FVector::ForwardVector;//FRotationMatrix(yawRotation).GetUnitAxis(EAxis::X);
+	const FVector rightDir = FVector::RightVector;//FRotationMatrix(yawRotation).GetUnitAxis(EAxis::Y);
+
+	pawn->AddMovementInput(forwardDir, value.Y);
+	pawn->AddMovementInput(rightDir, value.X);
 }
 #pragma endregion
 

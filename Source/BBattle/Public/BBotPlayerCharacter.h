@@ -29,6 +29,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere, Category = "Custom Component");
+	class UMovementActorComponent* movementComponent;
+
 protected:
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
 	class UInputMappingContext* inputMapping;
@@ -38,8 +41,7 @@ protected:
 
 	void Move(const FInputActionValue& value);
 
-	UPROPERTY(EditAnywhere, Category = "Custom Component");
-	class UMovementActorComponent* movementComponent;
+	void Look();
 
 private:
 	UWorld* worldPtr;

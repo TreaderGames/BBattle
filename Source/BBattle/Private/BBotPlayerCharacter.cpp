@@ -31,6 +31,7 @@ void ABBotPlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	Look();
 }
 
 // Called to bind functionality to input
@@ -56,11 +57,24 @@ void ABBotPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ABBotPlayerCharacter::Move(const FInputActionValue& value)
 {
+	if (movementComponent != nullptr) 
+	{
+		FVector2D inputVector = value.Get<FVector2D>();
+		movementComponent->Move(inputVector);
+		//GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "Move Move " + mousePos.ToString());
+	}
+	//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move 2"+ mousePos.ToString());
+}
+
+void ABBotPlayerCharacter::Look()
+{
 	FVector2d mousePos = UUtility::GetMouseToRayPosition(10000.0f, worldPtr); //GetMouseWorldPos();
 
-	if (movementComponent != nullptr) {
-		movementComponent->Move(mousePos);
+	if (movementComponent != nullptr)
+	{
+		movementComponent->Look(mousePos);
+		//GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "Move Move " + mousePos.ToString());
 	}
-	//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move "+ mousePos.ToString());
+	//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move 2"+ mousePos.ToString());
 }
 
