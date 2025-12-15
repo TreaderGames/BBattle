@@ -57,7 +57,7 @@ void ABBotPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ABBotPlayerCharacter::Move(const FInputActionValue& value)
 {
-	if (movementComponent != nullptr) 
+	if (IsValid(movementComponent))
 	{
 		FVector2D inputVector = value.Get<FVector2D>();
 		movementComponent->Move(inputVector);

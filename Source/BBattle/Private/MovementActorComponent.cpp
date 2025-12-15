@@ -47,7 +47,7 @@ void UMovementActorComponent::Move(FVector2D inputVector)
 
 void UMovementActorComponent::Look(FVector2d mouseWPos)
 {
-	GEngine->AddOnScreenDebugMessage(-2, 1, FColor::Blue, "UMovementActorComponent Move " + mouseWPos.ToString());
+	//GEngine->AddOnScreenDebugMessage(-2, 1, FColor::Blue, "UMovementActorComponent Move " + mouseWPos.ToString());
 	FVector mousePosition = FVector(mouseWPos.X, mouseWPos.Y, 0);
 
 	if (IsValid(controller))
@@ -77,7 +77,7 @@ void UMovementActorComponent::DoMove(FVector2D value)
 {
 	//const FRotator rotation = Controller->GetControlRotation();
 	//const FRotator yawRotation(0, rotation.Yaw, 0);
-	GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "value " + value.ToString());
+	//GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "value " + value.ToString());
 	const FVector forwardDir = FVector::ForwardVector;//FRotationMatrix(yawRotation).GetUnitAxis(EAxis::X);
 	const FVector rightDir = FVector::RightVector;//FRotationMatrix(yawRotation).GetUnitAxis(EAxis::Y);
 
