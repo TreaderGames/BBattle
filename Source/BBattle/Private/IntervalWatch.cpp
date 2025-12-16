@@ -19,8 +19,7 @@ void UIntervalWatch::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	ResetValue();
 }
 
 
@@ -29,6 +28,33 @@ void UIntervalWatch::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	UpdateTick(DeltaTime);
+}
+
+void UIntervalWatch::ResetValue()
+{
+	intervalDelta = 0;
+	intervalIndex = 0;
+
+	intervalDuration = gameConfig->defaultIntervalDuration;
+}
+
+void UIntervalWatch::UpdateTick(float delta)
+{
+	intervalDelta += delta;
+
+	if (intervalDelta >= intervalDuration)
+	{
+		intervalDelta = 0;
+		intervalIndex = (intervalIndex + 1) % gameConfig->maxIntervals;
+
+		HandleNextInterval();
+	}
+}
+
+
+void UIntervalWatch::HandleNextInterval()
+{
+	GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "Interval Index " + FString::FromInt(intervalIndex));
 }
 

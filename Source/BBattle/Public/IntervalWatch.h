@@ -7,6 +7,17 @@
 #include "GameConfig.h"
 #include "IntervalWatch.generated.h"
 
+/*intervalMax
+intervalDuration
+intervalIndex
+intervalDelta
+Event OnNextInterval(int intervalIndex)
+Tick()//Un
+HandleNextInterval()
+*/
+
+//UDELEGATE()
+DECLARE_DELEGATE_OneParam(FOnNextInterval, int32)
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BBATTLE_API UIntervalWatch : public UActorComponent
@@ -28,5 +39,16 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+private:
+
+	float intervalDuration;
+	float intervalDelta;
+
+	int32 intervalIndex;
+
+	FOnNextInterval OnNextInterval;
+
+	void HandleNextInterval();
+	void ResetValue();
+	void UpdateTick(float delta);
 };
