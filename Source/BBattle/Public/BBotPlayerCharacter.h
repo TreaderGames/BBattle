@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "MovementActorComponent.h"
+#include "IntervalWatch.h"
 #include "BBotPlayerCharacter.generated.h"
 
 
@@ -38,6 +39,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
 	class UInputAction* moveIA;
+
+	UPROPERTY(VisibleAnywhere, Category = "Ability");
+	TObjectPtr<UIntervalWatch> intervalWatch;
 
 	void Move(const FInputActionValue& value);
 

@@ -4,6 +4,7 @@
 #include "InputMappingContext.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "IntervalWatch.h"
 
 //Custom
 #include "UUtility.h"
@@ -17,13 +18,14 @@ ABBotPlayerCharacter::ABBotPlayerCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	movementComponent = CreateDefaultSubobject<UMovementActorComponent>(TEXT("MovementComponent"));
+	intervalWatch = CreateDefaultSubobject<UIntervalWatch>(TEXT("IntervalWatch"));
 }
 
 // Called when the game starts or when spawned
 void ABBotPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
