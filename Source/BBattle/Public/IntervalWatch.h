@@ -39,14 +39,14 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	FOnNextInterval OnNextInterval;
+
 private:
 
 	float intervalDuration;
 	float intervalDelta;
 
 	int32 intervalIndex;
-
-	FOnNextInterval OnNextInterval;
 
 	void HandleNextInterval();
 	void ResetValue();
