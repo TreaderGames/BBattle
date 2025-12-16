@@ -4,14 +4,30 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "Abilities/AbilityData.h"
 #include "PlayerDataSubSystem.generated.h"
 
-/**
- * 
+/*
+ SetInterval(AbilityData data, int index);
+GetInterval(int index)
+TArray<AbilityData> abilityArr;
+TArray<AbilityData> defaultAbilities;
  */
+
 UCLASS()
 class BBATTLE_API UPlayerDataSubSystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 	
+protected:
+	TArray<FAbilityData> abilityArr;
+
+public:
+
+	void GetInterval(int index);
+
+	void SetInterval(FAbilityData abilityData, int index);
+
+
+
 };
