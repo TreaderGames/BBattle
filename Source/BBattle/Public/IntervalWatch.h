@@ -7,15 +7,6 @@
 #include "GameConfig.h"
 #include "IntervalWatch.generated.h"
 
-/*intervalMax
-intervalDuration
-intervalIndex
-intervalDelta
-Event OnNextInterval(int intervalIndex)
-Tick()//Un
-HandleNextInterval()
-*/
-
 //UDELEGATE()
 DECLARE_DELEGATE_OneParam(FOnNextInterval, int32)
 
