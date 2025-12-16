@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Subsystems/PlayerDataSubSystem.h"
 #include "Engine/GameInstance.h"
 #include "MainGameInstance.generated.h"
 
@@ -16,4 +17,12 @@ class BBATTLE_API UMainGameInstance : public UGameInstance
 	
 protected:
 	void InitSubSystems();
+
+	UPROPERTY(EditAnywhere, Category = "Data Assets")
+	TObjectPtr<UPlayerDataAsset> playerDataAsset;
+
+public:
+	UMainGameInstance();
+
+	virtual void Init() override;
 };

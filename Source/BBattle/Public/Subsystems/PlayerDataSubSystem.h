@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Abilities/AbilityData.h"
+#include "PlayerDataAsset.h"
 #include "PlayerDataSubSystem.generated.h"
 
 /*
@@ -23,11 +24,12 @@ protected:
 	TArray<FAbilityData> abilityArr;
 
 public:
+	UPlayerDataSubSystem();
 
 	void GetInterval(int index);
 
 	void SetInterval(FAbilityData abilityData, int index);
 
-
+	void InitSubsystem(UPlayerDataAsset* playerDataAsset);
 
 };
