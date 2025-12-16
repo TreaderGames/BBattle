@@ -31,5 +31,6 @@ public:
 	void SetInterval(FAbilityData abilityData, int index);
 
 	void InitSubsystem(UPlayerDataAsset* playerDataAsset);
-
+	
+	void DebugFunction();
 };
