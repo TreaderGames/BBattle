@@ -19,9 +19,15 @@ void UPlayerDataSubSystem::SetInterval(FAbilityData abilityData, int index)
 void UPlayerDataSubSystem::InitSubsystem(UPlayerDataAsset* playerDataAsset)
 {
 	GEngine->AddOnScreenDebugMessage(-2, 2, FColor::Blue, "UPlayerDataSubSystem Ready 2");
-
-	//abilityArr = playerDataAsset->defaultAbilities;
-	//DebugFunction();
+	if (IsValid(playerDataAsset)) 
+	{
+		abilityArr = playerDataAsset->defaultAbilities;
+		//DebugFunction();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("playerDataAsset not found"));
+	}
 }
 
 void UPlayerDataSubSystem::DebugFunction()
@@ -31,7 +37,7 @@ void UPlayerDataSubSystem::DebugFunction()
 	for (int32 i = 0; i != abilityArr.Num(); ++i)
 	{
 		enumString = enumPtr->GetNameStringByValue(static_cast<int32>(abilityArr[i].abilityType));
-		GEngine->AddOnScreenDebugMessage(-2, 2, FColor::Blue, "Ability Type: " + enumString);
+		GEngine->AddOnScreenDebugMessage(i, 2, FColor::Blue, "Ability Type: " + enumString);
 		//UE_LOG(LogTemp, Error, "Ability Type: "+ enumString);
 	}
 }
