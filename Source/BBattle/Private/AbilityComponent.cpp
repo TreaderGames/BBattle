@@ -17,6 +17,11 @@ UAbilityComponent::UAbilityComponent()
 	// ...
 }
 
+void UAbilityComponent::DebugNotifyTick()
+{
+	UE_LOG(LogTemp, Error, TEXT("DebugNotifyTick"));
+}
+
 
 // Called when the game starts
 void UAbilityComponent::BeginPlay()

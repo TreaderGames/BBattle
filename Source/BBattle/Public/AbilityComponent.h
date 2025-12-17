@@ -19,6 +19,12 @@ public:
 	// Sets default values for this component's properties
 	UAbilityComponent();
 
+	UFUNCTION(BlueprintCallable, meta = (CompactNodeTitle = "DebugNotifyTick"))
+	void DebugNotifyTick();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
+	int32 testInt;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
