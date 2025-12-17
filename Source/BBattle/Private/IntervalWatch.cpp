@@ -36,14 +36,20 @@ void UIntervalWatch::ResetValue()
 	intervalDelta = 0;
 	intervalIndex = 0;
 
-	intervalDuration = gameConfig->defaultIntervalDuration;
+	if (IsValid(gameConfig)) {
+		intervalDuration = gameConfig->defaultIntervalDuration;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Game Config not found"));
+	}
 }
 
 void UIntervalWatch::UpdateTick(float delta)
 {
 	intervalDelta += delta;
 
-	if (intervalDelta >= intervalDuration)
+	if (IsValid(gameConfig) && intervalDelta >= intervalDuration)
 	{
 		intervalDelta = 0;
 		intervalIndex = (intervalIndex + 1) % gameConfig->maxIntervals;

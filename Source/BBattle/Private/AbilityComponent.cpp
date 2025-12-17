@@ -2,6 +2,9 @@
 
 
 #include "AbilityComponent.h"
+#include "Abilities/AbilityData.h"
+#include "Subsystems/PlayerDataSubSystem.h"
+#include "Kismet/GameplayStatics.h"
 #include "IntervalWatch.h"
 
 // Sets default values for this component's properties
@@ -21,11 +24,14 @@ void UAbilityComponent::BeginPlay()
 	Super::BeginPlay();
 
 	InitIntervalWatch();
+	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(this->GetWorld());
+	playerDataSubSystem = GameInstance->GetSubsystem<UPlayerDataSubSystem>();
 }
 
 void UAbilityComponent::HandleNextInterval(int32 index)
 {
 	GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "UAbilityComponent Interval Index " + FString::FromInt(index));
+	FAbilityData abilityData = playerDataSubSystem->GetInterval(index);
 }
 
 void UAbilityComponent::InitIntervalWatch()

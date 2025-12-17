@@ -40,7 +40,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
 	class UInputAction* moveIA;
 
-	UPROPERTY(VisibleAnywhere, Category = "Ability");
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability");
 	TObjectPtr<UIntervalWatch> intervalWatch;
 
 	void Move(const FInputActionValue& value);

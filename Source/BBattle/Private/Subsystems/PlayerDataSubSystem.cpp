@@ -8,8 +8,15 @@ UPlayerDataSubSystem::UPlayerDataSubSystem()
 {
 }
 
-void UPlayerDataSubSystem::GetInterval(int index)
+FAbilityData UPlayerDataSubSystem::GetInterval(int index)
 {
+	if (abilityArr.Num() > index)
+	{
+		GEngine->AddOnScreenDebugMessage(-6, 5, FColor::Blue, "GetInterval Interval Index " + FString::FromInt(index));
+		return abilityArr[index];
+	}
+
+	return FAbilityData();
 }
 
 void UPlayerDataSubSystem::SetInterval(FAbilityData abilityData, int index)

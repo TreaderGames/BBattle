@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "IntervalWatch.h"
+#include "AbilityBase.h"
+#include "Subsystems/PlayerDataSubSystem.h"
 #include "AbilityComponent.generated.h"
 
 
@@ -26,5 +28,10 @@ protected:
 	void InitIntervalWatch();
 
 	TObjectPtr<UIntervalWatch> intervalWatch;
+
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	TArray<TObjectPtr<UAbilityBase>> abilityBaseCollection;
+
+	UPlayerDataSubSystem* playerDataSubSystem;
 
 };

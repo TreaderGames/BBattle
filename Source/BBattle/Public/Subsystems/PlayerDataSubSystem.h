@@ -26,7 +26,7 @@ protected:
 public:
 	UPlayerDataSubSystem();
 
-	void GetInterval(int index);
+	FAbilityData GetInterval(int index);
 
 	void SetInterval(FAbilityData abilityData, int index);
 
