@@ -8,7 +8,7 @@
 
 UMainGameInstance::UMainGameInstance()
 {
-	UE_LOG(LogTemp, Error, TEXT("Game Instance Constructed"));
+	UE_LOG(LogTemp, Error, TEXT("UMainGameInstance Instance Constructed"));
 }
 
 void UMainGameInstance::Init()

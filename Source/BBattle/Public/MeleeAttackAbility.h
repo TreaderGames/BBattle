@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+UCLASS(Blueprintable, BlueprintType, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BBATTLE_API UMeleeAttackAbility : public UAbilityBase
 {
 	GENERATED_BODY()
@@ -20,8 +20,12 @@ public:
 
 protected:
 
+	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable, meta = (CompactNodeTitle = "MeleeAttackTickNotify"))
 	void MeleeAttackTickNotify();
+
+	void InitReferences();
 
 	//HealthComponent enemyHealthComponent;
 	UAnimationComponent* animComp;
@@ -30,6 +34,16 @@ protected:
 	int32 damage;
 
 	UPROPERTY(EditAnywhere, Category = "Ability")
+	int32 range;
+
+	UPROPERTY(EditAnywhere, Category = "Ability")
 	AnimationKey animKey;
 
+	TObjectPtr<UWorld> worldPtr;
+
+	TObjectPtr<AActor> owner;
+
+	const USkeletalMeshComponent* skeletonComponent;
+
+	const FName socketName = "armrSocket";
 };
