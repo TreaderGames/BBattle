@@ -20,6 +20,7 @@ public:
 
 protected:
 
+	UFUNCTION(BlueprintCallable, meta = (CompactNodeTitle = "MeleeAttackTickNotify"))
 	void MeleeAttackTickNotify();
 
 	//HealthComponent enemyHealthComponent;
