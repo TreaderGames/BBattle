@@ -18,6 +18,9 @@ public:
 
 	virtual void TriggerAbility(FAbilityData abilityData) override;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Ability")
+	USceneComponent* hitStart;
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -42,8 +45,6 @@ protected:
 	TObjectPtr<UWorld> worldPtr;
 
 	TObjectPtr<AActor> owner;
-
-	const USkeletalMeshComponent* skeletonComponent;
 
 	const FName socketName = "armrSocket";
 };
