@@ -31,6 +31,10 @@ void UAbilityComponent::BeginPlay()
 	InitIntervalWatch();
 	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(this->GetWorld());
 	playerDataSubSystem = GameInstance->GetSubsystem<UPlayerDataSubSystem>();
+
+	GetOwner()->GetComponents<UAbilityBase>(abilityBaseCollection);
+
+	GEngine->AddOnScreenDebugMessage(-6, 4, FColor::Blue, "abilityBaseCollection count " + FString::FromInt(abilityBaseCollection.Num()));
 }
 
 void UAbilityComponent::HandleNextInterval(int32 index)
