@@ -6,6 +6,10 @@
 void UMeleeAttackAbility::TriggerAbility(FAbilityData abilityData)
 {
 	Super::TriggerAbility(abilityData);
+
+	if (abilityData.abilityType == abilityType) {
+		UE_LOG(LogTemp, Error, TEXT("TriggerAbility"));
+	}
 }
 
 void UMeleeAttackAbility::MeleeAttackTickNotify()

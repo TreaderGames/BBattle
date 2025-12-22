@@ -41,6 +41,11 @@ void UAbilityComponent::HandleNextInterval(int32 index)
 {
 	GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "UAbilityComponent Interval Index " + FString::FromInt(index));
 	FAbilityData abilityData = playerDataSubSystem->GetInterval(index);
+
+	for (int32 i = 0; i < abilityBaseCollection.Num(); i++)
+	{
+		abilityBaseCollection[i]->TriggerAbility(abilityData);
+	}
 }
 
 void UAbilityComponent::InitIntervalWatch()
