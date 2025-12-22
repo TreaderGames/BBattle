@@ -7,8 +7,16 @@ void UMeleeAttackAbility::TriggerAbility(FAbilityData abilityData)
 {
 	Super::TriggerAbility(abilityData);
 
-	if (abilityData.abilityType == abilityType) {
+	if (abilityData.abilityType == abilityType) 
+	{
 		UE_LOG(LogTemp, Error, TEXT("TriggerAbility"));
+
+		if (!IsValid(animComp))
+		{
+			animComp = GetOwner()->GetComponentByClass<UAnimationComponent>();
+		}
+
+		animComp->PlayAnimation(animKey);
 	}
 }
 

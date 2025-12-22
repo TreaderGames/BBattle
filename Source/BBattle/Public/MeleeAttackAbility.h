@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "AbilityBase.h"
+#include "AnimationComponent.h"
 #include "MeleeAttackAbility.generated.h"
-
 /**
  * 
  */
@@ -23,8 +23,12 @@ protected:
 	void MeleeAttackTickNotify();
 
 	//HealthComponent enemyHealthComponent;
+	UAnimationComponent* animComp;
 
 	UPROPERTY(EditAnywhere, Category = "Ability")
 	int32 damage;
+
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	AnimationKey animKey;
 
 };
