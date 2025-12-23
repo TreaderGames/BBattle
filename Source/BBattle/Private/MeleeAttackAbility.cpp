@@ -2,6 +2,7 @@
 
 
 #include "MeleeAttackAbility.h"
+#include "HealthComponent.h"
 
 void UMeleeAttackAbility::BeginPlay()
 {
@@ -35,6 +36,8 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
         UE_LOG(LogTemp, Error, TEXT("Hit start not found"));
         return;
     }
+    UHealthComponent* healthComponent;
+
 	FVector traceStart = hitStart->GetComponentLocation();
 	FVector traceEnd = traceStart + owner->GetActorForwardVector() * range;
 
@@ -52,14 +55,22 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
     );
     UE_LOG(LogTemp, Error, TEXT("MeleeAttackTickNotify 4"));
     // Optional: Draw debug line to visualize trace
-    DrawDebugLine(worldPtr, traceStart, traceEnd, FColor::Green, false, 2.0f);
-    DrawDebugSphere(worldPtr, traceStart, 10.0f, 1, FColor::Green, false, 3.0f);
+    //DrawDebugLine(worldPtr, traceStart, traceEnd, FColor::Green, false, 2.0f);
+    //DrawDebugSphere(worldPtr, traceStart, 10.0f, 1, FColor::Green, false, 3.0f);
 
     if (bHit)
     {
         UE_LOG(LogTemp, Error, TEXT("Hit Actor: %s at Location: %s"),
             *hit.GetActor()->GetName(),
             *hit.ImpactPoint.ToString());
+
+        healthComponent = hit.GetActor()->GetComponentByClass<UHealthComponent>();
+
+        if (IsValid(healthComponent))
+        {
+            UE_LOG(LogTemp, Error, TEXT("Deal damage"));
+            healthComponent->DealDamage(damage);
+        }
     }
     else
     {
