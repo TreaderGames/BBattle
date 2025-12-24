@@ -20,4 +20,8 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
 	int32 defaultIntervalDuration;
+
+
+	UPROPERTY(EditDefaultsOnly, Category = "Currency")
+	int32 defaultCredits;
 };

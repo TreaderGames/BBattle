@@ -3,6 +3,7 @@
 
 #include "MainGameInstance.h"
 #include "PlayerDataAsset.h"
+#include "Subsystems/CurrencyTrackerSubsystem.h"
 #include "Subsystems/PlayerDataSubSystem.h"
 
 
@@ -21,11 +22,20 @@ void UMainGameInstance::Init()
 void UMainGameInstance::InitSubSystems()
 {
 	UPlayerDataSubSystem* playerDataSubSystem = this->GetSubsystem<UPlayerDataSubSystem>();
+	UCurrencyTrackerSubsystem* currencyTracker = this->GetSubsystem<UCurrencyTrackerSubsystem>();
+
 	UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems"));
 	if (IsValid(playerDataSubSystem))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems IsValid"));
 		playerDataSubSystem->InitSubsystem(playerDataAsset);
 		GEngine->AddOnScreenDebugMessage(-2, 2, FColor::Blue, "UPlayerDataSubSystem Ready");
+	}
+
+	if (IsValid(currencyTracker))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems IsValid"));
+		currencyTracker->InitSubsystem(gameConfig);
+		GEngine->AddOnScreenDebugMessage(-2, 2, FColor::Blue, "UCurrencyTrackerSubsystem Ready");
 	}
 }

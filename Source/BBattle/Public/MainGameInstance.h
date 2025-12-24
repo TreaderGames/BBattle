@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/PlayerDataSubSystem.h"
+#include "GameConfig.h"
 #include "Engine/GameInstance.h"
 #include "MainGameInstance.generated.h"
 
@@ -20,6 +21,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Data Assets")
 	TObjectPtr<UPlayerDataAsset> playerDataAsset;
+
+	UPROPERTY(EditAnywhere, Category = "Data Assets")
+	TObjectPtr<UGameConfig> gameConfig;
 
 public:
 	UMainGameInstance();
