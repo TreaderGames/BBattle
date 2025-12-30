@@ -11,25 +11,25 @@ enum class EAbilityType : uint8
 	BasicAttack UMETA(DisplayName = "Basic Attack")
 };
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FAbilityData
 {
 	GENERATED_BODY()
 
-public:
+//public:
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	EAbilityType abilityType = EAbilityType::None;
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	FString description;
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	FString name;
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	UTexture2D* icon;
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	int32 value;
 };
