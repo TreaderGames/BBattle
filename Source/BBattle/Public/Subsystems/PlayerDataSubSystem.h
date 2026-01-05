@@ -33,4 +33,7 @@ public:
 	void InitSubsystem(UPlayerDataAsset* playerDataAsset);
 	
 	void DebugFunction();
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FAbilityData> GetAbilityArr();
 };

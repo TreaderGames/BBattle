@@ -48,3 +48,8 @@ void UPlayerDataSubSystem::DebugFunction()
 		//UE_LOG(LogTemp, Error, "Ability Type: "+ enumString);
 	}
 }
+
+TArray<FAbilityData> UPlayerDataSubSystem::GetAbilityArr()
+{
+	return abilityArr;
+}
