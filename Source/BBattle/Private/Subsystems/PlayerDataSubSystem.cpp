@@ -41,15 +41,29 @@ void UPlayerDataSubSystem::DebugFunction()
 {
 	const UEnum* enumPtr = StaticEnum<EAbilityType>();
 	FString enumString;
+	UE_LOG(LogTemp, Error, TEXT("Debug Function PlayerDataSubSystem"));
 	for (int32 i = 0; i != abilityArr.Num(); ++i)
 	{
 		enumString = enumPtr->GetNameStringByValue(static_cast<int32>(abilityArr[i].abilityType));
 		GEngine->AddOnScreenDebugMessage(i, 2, FColor::Blue, "Ability Type: " + enumString);
-		//UE_LOG(LogTemp, Error, "Ability Type: "+ enumString);
+		UE_LOG(LogTemp, Error, TEXT("Ability Type: %s"), *enumString);
 	}
 }
 
 TArray<FAbilityData> UPlayerDataSubSystem::GetAbilityArr()
 {
 	return abilityArr;
+}
+
+void UPlayerDataSubSystem::UpdatePlayerAbilities(TArray<FAbilityData> abilityDataArr)
+{
+	abilityArr = abilityDataArr;
+	const UEnum* enumPtr = StaticEnum<EAbilityType>();
+	FString enumString;
+	for (int32 i = 0; i != abilityArr.Num(); ++i)
+	{
+		enumString = enumPtr->GetNameStringByValue(static_cast<int32>(abilityArr[i].abilityType));
+		GEngine->AddOnScreenDebugMessage(i, 2, FColor::Blue, "Ability Type: " + enumString);
+		UE_LOG(LogTemp, Error, TEXT("Ability Type: %s"), *enumString);
+	}
 }
