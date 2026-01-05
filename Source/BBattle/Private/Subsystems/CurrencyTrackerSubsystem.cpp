@@ -16,6 +16,8 @@ int32 UCurrencyTrackerSubsystem::GetCurrencyCount()
 void UCurrencyTrackerSubsystem::UpdateCurrencyCount(int32 count)
 {
 	currencyCount = FMath::Clamp(currencyCount + count, 0, currencyCount + count);
+
+	OnCurrencyUpdate.Broadcast();
 }
 
 void UCurrencyTrackerSubsystem::InitSubsystem(UGameConfig* config)

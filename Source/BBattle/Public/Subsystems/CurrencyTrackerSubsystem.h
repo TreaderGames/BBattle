@@ -10,6 +10,10 @@
 /**
  * 
  */
+
+UDELEGATE(BlueprintCallable)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCurrencyUpdate);
+
 UCLASS()
 class BBATTLE_API UCurrencyTrackerSubsystem : public UGameInstanceSubsystem
 {
@@ -24,10 +28,14 @@ protected:
 public:
 	UCurrencyTrackerSubsystem();
 
+	UFUNCTION(BlueprintCallable)
 	int32 GetCurrencyCount();
 
+	UFUNCTION(BlueprintCallable)
 	void UpdateCurrencyCount(int32 count);
 
 	void InitSubsystem(UGameConfig* config);
 
+	UPROPERTY(EditAnywhere, BlueprintAssignable, Category = "Ability");
+	FOnCurrencyUpdate OnCurrencyUpdate;
 };
