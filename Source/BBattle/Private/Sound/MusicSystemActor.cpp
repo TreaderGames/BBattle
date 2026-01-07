@@ -18,13 +18,13 @@ void AMusicSystemActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-    PlayAudio(EMusicType::MainMenu);
+    PlayAudio(defaultMusic);
 }
 
 void AMusicSystemActor::PlayAudio(EMusicType musicType)
 {
     if (IsValid(audioComponent)) {
-        for (const FMusicData& entry : musicEntries)
+        for (const FMusicData& entry : soundDataAsset->soundEntries)
         {
             if (entry.musicType == musicType && entry.soundBase)
             {
