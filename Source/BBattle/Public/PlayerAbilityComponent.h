@@ -10,7 +10,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BBATTLE_API UPlayerAbilityComponent : public UAbilityComponentBase
 {
 	GENERATED_BODY()
