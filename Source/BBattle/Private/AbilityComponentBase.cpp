@@ -25,7 +25,7 @@ void UAbilityComponentBase::BeginPlay()
 
 	GetOwner()->GetComponents<UAbilityBase>(abilityBaseCollection);
 
-	GEngine->AddOnScreenDebugMessage(-6, 4, FColor::Blue, "abilityBaseCollection count " + FString::FromInt(abilityBaseCollection.Num()));
+	GEngine->AddOnScreenDebugMessage(-6, 4, FColor::White, "abilityBaseCollection count " + FString::FromInt(abilityBaseCollection.Num()));
 }
 
 void UAbilityComponentBase::HandleNextInterval(int32 index)
