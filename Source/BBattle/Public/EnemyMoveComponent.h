@@ -3,36 +3,40 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MovementActorComponent.h"
 #include "Components/ActorComponent.h"
-#include "MovementActorComponent.generated.h"
+#include "EnemyMoveComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BBATTLE_API UMovementActorComponent : public UActorComponent
+class BBATTLE_API UEnemyMoveComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UMovementActorComponent();
+	UEnemyMoveComponent();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void LookRotate(FVector forward);
-	void DoMove(FVector2D value);
+	UPROPERTY(EditAnywhere, Category = "Custom Component")
+	float enemySpeed;
 
-	AController* controller;
-	APawn* pawn;
+	UPROPERTY(EditAnywhere, Category = "Custom Component")
+	float maxDistFromPlayer;
+
+	UPROPERTY(VisibleAnywhere, Category = "Custom Component");
+	class UMovementActorComponent* movementComponent;
+
+	TObjectPtr<ACharacter> playerCharacter;
+
+	void MoveTowardsPlayer();
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void Move(FVector2D inputVector);
-
-	void MoveTowards(FVector inputVector, float speed, double distThreshold);
-
-	void Look(FVector2d inputVector);
+		
 };

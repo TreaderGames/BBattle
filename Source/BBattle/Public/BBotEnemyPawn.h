@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "IntervalWatch.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/DefaultPawn.h"
 #include "BBotEnemyPawn.generated.h"
 
 UCLASS()
-class BBATTLE_API ABBotEnemyPawn : public APawn
+class BBATTLE_API ABBotEnemyPawn : public ADefaultPawn
 {
 	GENERATED_BODY()
 

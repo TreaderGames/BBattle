@@ -23,6 +23,8 @@ void UMovementActorComponent::BeginPlay()
 
 	pawn = CastChecked<APawn>(GetOwner());
 	controller = pawn->GetController();
+
+	UE_LOG(LogTemp, Error, TEXT("controller %s"), *pawn->GetFName().ToString());
 }
 
 
@@ -45,14 +47,34 @@ void UMovementActorComponent::Move(FVector2D inputVector)
 	}
 }
 
+void UMovementActorComponent::MoveTowards(FVector inputVector, float speed, double dist)
+{
+	FVector currentPos = pawn->GetActorLocation();
+
+	if (FVector::Distance(currentPos, inputVector) >= dist) {
+
+		FVector dirVector = inputVector - currentPos;
+		FVector2D moveVector;
+
+		dirVector.Normalize();
+		//dirVector *= speed;
+		moveVector = FVector2D(dirVector.Y, dirVector.X);
+
+		LookRotate(dirVector);
+		pawn->AddMovementInput(dirVector, speed);
+
+		//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer %f"), FVector::Distance(currentPos, inputVector));
+	}
+}
+
 void UMovementActorComponent::Look(FVector2d mouseWPos)
 {
 	//GEngine->AddOnScreenDebugMessage(-2, 1, FColor::Blue, "UMovementActorComponent Move " + mouseWPos.ToString());
 	FVector mousePosition = FVector(mouseWPos.X, mouseWPos.Y, 0);
 
-	if (IsValid(controller))
+	if (IsValid(pawn))
 	{
-		FVector forwardDir = mousePosition - controller->GetPawn()->GetActorLocation();
+		FVector forwardDir = mousePosition - pawn->GetActorLocation();
 		LookRotate(forwardDir);
 	}
 }
@@ -67,9 +89,10 @@ void UMovementActorComponent::LookRotate(FVector forward)
 	targetRotation.Pitch = 0.f;
 	targetRotation.Roll = 0.f;
 
-	if (controller)
+	if (pawn)
 	{
-		controller->SetControlRotation(targetRotation);
+		//UE_LOG(LogTemp, Error, TEXT("LookRotate %s"), *targetRotation.ToString());
+		pawn->SetActorRotation(targetRotation); //SetControlRotation(targetRotation);
 	}
 }
 
