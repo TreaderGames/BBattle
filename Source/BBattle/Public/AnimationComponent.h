@@ -12,6 +12,7 @@ enum class AnimationKey : uint8
 {
 	None,
 	MeleeAttack UMETA(DisplayName = "Melee Attack"),
+	Death UMETA(DisplayName = "Death"),
 };
 
 UDELEGATE(BlueprintCallable)

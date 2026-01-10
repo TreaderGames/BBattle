@@ -43,6 +43,16 @@ void UHealthComponent::DealDamage(int32 damage)
 		currentHealth -= damage;
 	}
 
+	if (currentHealth <= 0)
+	{
+		if (!IsValid(animationComponent))
+		{
+			animationComponent = GetOwner()->GetComponentByClass<UAnimationComponent>();
+		}
+
+		animationComponent->PlayAnimation(AnimationKey::Death);
+	}
+
 	UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);
 }
 

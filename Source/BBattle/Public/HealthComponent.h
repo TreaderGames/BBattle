@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "AnimationComponent.h"
 #include "HealthComponent.generated.h"
 
 
@@ -22,6 +23,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Ability");
 	int32 currentHealth;
+
+	UAnimationComponent* animationComponent;
 
 public:	
 	// Called every frame
