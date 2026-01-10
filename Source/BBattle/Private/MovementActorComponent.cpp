@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "HealthComponent.h"
 #include "MovementActorComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -23,8 +23,13 @@ void UMovementActorComponent::BeginPlay()
 
 	pawn = CastChecked<APawn>(GetOwner());
 	controller = pawn->GetController();
+	healthComponent = GetOwner()->GetComponentByClass<UHealthComponent>();
 
 	UE_LOG(LogTemp, Error, TEXT("controller %s"), *pawn->GetFName().ToString());
+
+	if (IsValid(healthComponent)) {
+		UE_LOG(LogTemp, Error, TEXT("healthComponent is valid"));
+	}
 }
 
 
@@ -41,7 +46,8 @@ void UMovementActorComponent::TickComponent(float DeltaTime, ELevelTick TickType
 
 void UMovementActorComponent::Move(FVector2D inputVector)
 {
-	if (IsValid(controller))
+
+	if (IsValid(controller) && IsValid(healthComponent) && healthComponent->GetIsAlive())
 	{
 		DoMove(inputVector);
 	}
@@ -49,21 +55,24 @@ void UMovementActorComponent::Move(FVector2D inputVector)
 
 void UMovementActorComponent::MoveTowards(FVector inputVector, float speed, double dist)
 {
-	FVector currentPos = pawn->GetActorLocation();
+	if (IsValid(healthComponent) && healthComponent->GetIsAlive())
+	{
+		FVector currentPos = pawn->GetActorLocation();
 
-	if (FVector::Distance(currentPos, inputVector) >= dist) {
+		if (FVector::Distance(currentPos, inputVector) >= dist) {
 
-		FVector dirVector = inputVector - currentPos;
-		FVector2D moveVector;
+			FVector dirVector = inputVector - currentPos;
+			FVector2D moveVector;
 
-		dirVector.Normalize();
-		//dirVector *= speed;
-		moveVector = FVector2D(dirVector.Y, dirVector.X);
+			dirVector.Normalize();
+			//dirVector *= speed;
+			moveVector = FVector2D(dirVector.Y, dirVector.X);
 
-		LookRotate(dirVector);
-		pawn->AddMovementInput(dirVector, speed);
+			LookRotate(dirVector);
+			pawn->AddMovementInput(dirVector, speed);
 
-		//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer %f"), FVector::Distance(currentPos, inputVector));
+			//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer %f"), FVector::Distance(currentPos, inputVector));
+		}
 	}
 }
 
@@ -72,7 +81,7 @@ void UMovementActorComponent::Look(FVector2d mouseWPos)
 	//GEngine->AddOnScreenDebugMessage(-2, 1, FColor::Blue, "UMovementActorComponent Move " + mouseWPos.ToString());
 	FVector mousePosition = FVector(mouseWPos.X, mouseWPos.Y, 0);
 
-	if (IsValid(pawn))
+	if (IsValid(pawn) && IsValid(healthComponent) && healthComponent->GetIsAlive())
 	{
 		FVector forwardDir = mousePosition - pawn->GetActorLocation();
 		LookRotate(forwardDir);

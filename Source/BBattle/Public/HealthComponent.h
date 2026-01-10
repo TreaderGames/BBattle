@@ -31,4 +31,6 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void DealDamage(int32 damage);
+
+	bool GetIsAlive();
 };

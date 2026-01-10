@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "HealthComponent.h"
 #include "MovementActorComponent.generated.h"
 
 
@@ -25,6 +26,8 @@ protected:
 
 	AController* controller;
 	APawn* pawn;
+
+	UHealthComponent* healthComponent;
 
 public:	
 	// Called every frame

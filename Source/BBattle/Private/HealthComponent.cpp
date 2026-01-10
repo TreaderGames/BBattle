@@ -56,3 +56,8 @@ void UHealthComponent::DealDamage(int32 damage)
 	UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);
 }
 
+bool UHealthComponent::GetIsAlive()
+{
+	//UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);
+	return currentHealth > 0;
+}
