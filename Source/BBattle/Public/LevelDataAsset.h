@@ -16,9 +16,16 @@ struct FEnemyData
 	UPROPERTY(EditAnywhere, Category = "Ability")
 	TArray<FAbilityData> abilityArr;
 };
-/**
- * 
- */
+
+USTRUCT(BlueprintType)
+struct FLevelData
+{
+	GENERATED_BODY();
+
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	TArray<FEnemyData> enemyDataArr;
+};
+
 UCLASS(BlueprintType)
 class BBATTLE_API ULevelDataAsset : public UDataAsset
 {
@@ -27,6 +34,6 @@ class BBATTLE_API ULevelDataAsset : public UDataAsset
 public:
 
 	UPROPERTY(EditAnywhere, Category = "Ability")
-	TArray <FEnemyData> enemyData;
+	TArray <FLevelData> levelDataArr;
 
 };
