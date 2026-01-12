@@ -11,11 +11,21 @@ void ULevelSubSystem::GetSpawnPoints()
 	TArray<AActor*> enemySpawnPoints;
 	TArray<AActor*> playerSpawnPoints;
 
+	FVector posVector;
+
 	UGameplayStatics::GetAllActorsWithTag(GetWorld(), levelDataAsset->enemySpawnTag, enemySpawnPoints);
 	UGameplayStatics::GetAllActorsWithTag(GetWorld(), levelDataAsset->playerSpawnTag, playerSpawnPoints);
 
-	UE_LOG(LogTemp, Error, TEXT("Spawn count"));
-	UE_LOG(LogTemp, Error, TEXT("Spawn count: %s _ %s"), *FString::FromInt(enemySpawnPoints.Num()), *FString::FromInt(playerSpawnPoints.Num()));
+	for (int i = 0; i < enemySpawnPoints.Num(); i++)
+	{
+		posVector = enemySpawnPoints[i]->GetActorLocation();
+		enemySpawnLocations.Add(posVector);
+	}
+
+	posVector = playerSpawnPoints[0]->GetActorLocation();
+	playerSpawnLocation = posVector;
+
+	UE_LOG(LogTemp, Error, TEXT("Spawn count: %s _ %s"), *FString::FromInt(enemySpawnLocations.Num()), *FString::FromInt(playerSpawnPoints.Num()));
 }
 
 void ULevelSubSystem::SpawnEnemies()
