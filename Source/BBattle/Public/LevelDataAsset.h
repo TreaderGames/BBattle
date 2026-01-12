@@ -1,0 +1,32 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
+#include "Abilities/AbilityData.h"
+#include "LevelDataAsset.generated.h"
+
+
+USTRUCT(BlueprintType)
+struct FEnemyData
+{
+	GENERATED_BODY();
+
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	TArray<FAbilityData> abilityArr;
+};
+/**
+ * 
+ */
+UCLASS(BlueprintType)
+class BBATTLE_API ULevelDataAsset : public UDataAsset
+{
+	GENERATED_BODY()
+	
+public:
+
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	TArray <FEnemyData> enemyData;
+
+};
