@@ -12,7 +12,7 @@
  * 
  */
 UCLASS()
-class BBATTLE_API ULevelSubSystem : public USubsystem
+class BBATTLE_API ULevelSubSystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
@@ -20,12 +20,13 @@ protected:
 
 	int currentLevel;
 
-	TArray<FVector> spawnLocations;
+	TArray<FVector> enemySpawnLocations;
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	FVector playerSpawnLocation;
+
 	ULevelDataAsset* levelDataAsset;
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	UPROPERTY(EditAnywhere, Category = "Level")
 	ABBotPlayerCharacter* bbotPlayer;
 
 	void GetSpawnPoints();
@@ -34,6 +35,7 @@ protected:
 
 	void SpawnPlayer();
 
+
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Ability")
@@ -41,5 +43,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Ability")
 	void InitLevel();
+
+	void InitSubsystem(ULevelDataAsset* levelData);
 
 };

@@ -36,4 +36,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Ability")
 	TArray <FLevelData> levelDataArr;
 
+	UPROPERTY(EditAnywhere, Category = "Level")
+	FName enemySpawnTag;
+
+	UPROPERTY(EditAnywhere, Category = "Level")
+	FName playerSpawnTag;
 };
