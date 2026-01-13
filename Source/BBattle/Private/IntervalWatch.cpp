@@ -19,6 +19,8 @@ void UIntervalWatch::BeginPlay()
 {
 	Super::BeginPlay();
 
+	owningActor = GetOwner();
+
 	ResetValue();
 }
 
@@ -49,7 +51,7 @@ void UIntervalWatch::UpdateTick(float delta)
 {
 	intervalDelta += delta;
 
-	if (IsValid(gameConfig) && intervalDelta >= intervalDuration)
+	if (!owningActor->IsHidden() && IsValid(gameConfig) && intervalDelta >= intervalDuration)
 	{
 		intervalDelta = 0;
 		intervalIndex = (intervalIndex + 1) % gameConfig->maxIntervals;

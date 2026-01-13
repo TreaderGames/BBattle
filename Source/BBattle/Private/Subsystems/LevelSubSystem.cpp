@@ -30,15 +30,34 @@ void ULevelSubSystem::GetSpawnPoints()
 
 void ULevelSubSystem::SpawnEnemies()
 {
+	if (!IsValid(bbotEnemyPawnTemplate))
+	{
+		bbotEnemyPawnTemplate = UGameplayStatics::GetActorOfClass(GetWorld(), ABBotEnemyPawn::StaticClass());
+	}
+
+	ToggleActor(bbotEnemyPawnTemplate, false);
 }
 
 void ULevelSubSystem::SpawnPlayer()
 {
-	AActor* playerActor = UGameplayStatics::GetActorOfClass(GetWorld(), ABBotPlayerCharacter::StaticClass());
-
-	if (IsValid(playerActor))
+	if (!IsValid(bbotPlayer))
 	{
-		playerActor->SetActorLocation(playerSpawnLocation);
+		bbotPlayer = UGameplayStatics::GetActorOfClass(GetWorld(), ABBotPlayerCharacter::StaticClass());
+	}
+
+	if (IsValid(bbotPlayer))
+	{
+		bbotPlayer->SetActorLocation(playerSpawnLocation);
+	}
+}
+
+void ULevelSubSystem::ToggleActor(AActor* actor, bool value)
+{
+	actor->SetActorHiddenInGame(!value);
+
+	for (UActorComponent* actorComp : actor->GetComponents())
+	{
+		UE_LOG(LogTemp, Error, TEXT("Actor Comp: %s"), *actorComp->GetName());
 	}
 }
 
@@ -55,6 +74,7 @@ void ULevelSubSystem::InitLevel()
 {
 	GetSpawnPoints();
 	SpawnPlayer();
+	SpawnEnemies();
 }
 
 void ULevelSubSystem::InitSubsystem(ULevelDataAsset* levelData)

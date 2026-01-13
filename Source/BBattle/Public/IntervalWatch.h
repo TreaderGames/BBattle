@@ -39,6 +39,8 @@ private:
 
 	int32 intervalIndex;
 
+	AActor* owningActor;
+
 	void HandleNextInterval();
 	void ResetValue();
 	void UpdateTick(float delta);

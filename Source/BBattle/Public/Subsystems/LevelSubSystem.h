@@ -6,6 +6,7 @@
 #include "Subsystems/Subsystem.h"
 #include "LevelDataAsset.h"
 #include "BBotPlayerCharacter.h"
+#include "BBotEnemyPawn.h"
 #include "LevelSubSystem.generated.h"
 
 /**
@@ -27,13 +28,18 @@ protected:
 	ULevelDataAsset* levelDataAsset;
 
 	UPROPERTY(EditAnywhere, Category = "Level")
-	ABBotPlayerCharacter* bbotPlayer;
+	AActor* bbotPlayer;
+
+	UPROPERTY(EditAnywhere, Category = "Level")
+	AActor* bbotEnemyPawnTemplate;
 
 	void GetSpawnPoints();
 
 	void SpawnEnemies();
 
 	void SpawnPlayer();
+
+	void ToggleActor(AActor* actor, bool value);
 
 
 public:
