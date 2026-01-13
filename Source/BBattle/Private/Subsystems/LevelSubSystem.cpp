@@ -34,6 +34,14 @@ void ULevelSubSystem::SpawnEnemies()
 
 void ULevelSubSystem::SpawnPlayer()
 {
+	AActor* playerActor = UGameplayStatics::GetActorOfClass(GetWorld(), ABBotPlayerCharacter::StaticClass());
+
+	UE_LOG(LogTemp, Error, TEXT("SpawnPlayer 1"));
+	if (IsValid(playerActor))
+	{
+		UE_LOG(LogTemp, Error, TEXT("SpawnPlayer"));
+		playerActor->SetActorLocation(playerSpawnLocation);
+	}
 }
 
 #pragma endregion
@@ -48,6 +56,7 @@ FLevelData ULevelSubSystem::GetCurrentLevelData()
 void ULevelSubSystem::InitLevel()
 {
 	GetSpawnPoints();
+	SpawnPlayer();
 }
 
 void ULevelSubSystem::InitSubsystem(ULevelDataAsset* levelData)

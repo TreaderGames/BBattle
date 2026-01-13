@@ -32,5 +32,6 @@ public:
 
 	void DealDamage(int32 damage);
 
+	UFUNCTION(BlueprintCallable)
 	bool GetIsAlive();
 };
