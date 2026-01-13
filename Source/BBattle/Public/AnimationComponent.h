@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Interfaces/IResetable.h"
 #include "AnimationComponent.generated.h"
 
 
@@ -19,7 +20,7 @@ UDELEGATE(BlueprintCallable)
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAnimationPlayed);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BBATTLE_API UAnimationComponent : public UActorComponent
+class BBATTLE_API UAnimationComponent : public UActorComponent, public IResetable
 {
 	GENERATED_BODY()
 
@@ -47,4 +48,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	AnimationKey animKey;
 		
+	virtual void Reset() override;
 };

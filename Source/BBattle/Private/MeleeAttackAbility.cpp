@@ -24,7 +24,9 @@ void UMeleeAttackAbility::TriggerAbility(FAbilityData abilityData)
 			animComp = GetOwner()->GetComponentByClass<UAnimationComponent>();
 		}
 
-		animComp->PlayAnimation(animKey);
+        if (IsValid(animComp)) {
+            animComp->PlayAnimation(animKey);
+        }
 	}
 }
 

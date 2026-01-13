@@ -7,6 +7,7 @@
 #include "InputActionValue.h"
 #include "MovementActorComponent.h"
 #include "IntervalWatch.h"
+#include "Interfaces/IResetable.h"
 #include "BBotPlayerCharacter.generated.h"
 
 
@@ -43,9 +44,17 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability");
 	TObjectPtr<UIntervalWatch> intervalWatch;
 
+	TArray<IResetable*> allResetableComponents;
+
 	void Move(const FInputActionValue& value);
 
 	void Look();
+
+	void UpdateResetableComponent();
+
+	void DoReset();
+
+	APlayerController* PC;
 
 private:
 	UWorld* worldPtr;

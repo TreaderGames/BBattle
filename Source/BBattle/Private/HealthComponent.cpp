@@ -20,6 +20,7 @@ void UHealthComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
+	currentHealth = health;
 	
 }
 
@@ -60,4 +61,9 @@ bool UHealthComponent::GetIsAlive()
 {
 	//UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);
 	return currentHealth > 0;
+}
+
+void UHealthComponent::Reset()
+{
+	currentHealth = health;
 }

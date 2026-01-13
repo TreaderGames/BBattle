@@ -57,6 +57,7 @@ void UMovementActorComponent::MoveTowards(FVector inputVector, float speed, doub
 {
 	if (IsValid(healthComponent) && healthComponent->GetIsAlive())
 	{
+		//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer healthComponent"));
 		FVector currentPos = pawn->GetActorLocation();
 
 		if (FVector::Distance(currentPos, inputVector) >= dist) {

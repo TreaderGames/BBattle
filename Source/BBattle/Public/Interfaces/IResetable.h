@@ -22,6 +22,7 @@ class IResetable
 
 public:
 
-	void Reset();
+	//UFUNCTION(BlueprintNativeEvent)
+	virtual void Reset() = 0;
 
 };

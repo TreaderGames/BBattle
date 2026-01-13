@@ -44,3 +44,9 @@ AnimationKey UAnimationComponent::GetAnimKey()
 	return animKey;
 }
 
+void UAnimationComponent::Reset()
+{
+	PlayAnimation(AnimationKey::None);
+}
+
+

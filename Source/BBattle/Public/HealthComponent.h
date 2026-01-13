@@ -5,11 +5,12 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "AnimationComponent.h"
+#include "Interfaces/IResetable.h"
 #include "HealthComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BBATTLE_API UHealthComponent : public UActorComponent
+class BBATTLE_API UHealthComponent : public UActorComponent, public IResetable
 {
 	GENERATED_BODY()
 
@@ -22,6 +23,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Ability");
+	int32 health;
+
 	int32 currentHealth;
 
 	UAnimationComponent* animationComponent;
@@ -34,4 +37,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool GetIsAlive();
+
+	virtual void Reset() override;
 };

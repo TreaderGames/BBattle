@@ -26,6 +26,8 @@ void ABBotPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	PC = GetWorld()->GetFirstPlayerController();
+	UpdateResetableComponent();
 }
 
 // Called every frame
@@ -34,6 +36,13 @@ void ABBotPlayerCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	Look();
+
+	if (PC && PC->IsInputKeyDown(EKeys::SpaceBar))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("SpaceBar is currently held down"));
+		DoReset();
+		// Handle your logic here
+	}
 }
 
 // Called to bind functionality to input
@@ -78,5 +87,30 @@ void ABBotPlayerCharacter::Look()
 		//GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "Move Move " + mousePos.ToString());
 	}
 	//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move 2"+ mousePos.ToString());
+}
+
+void ABBotPlayerCharacter::UpdateResetableComponent()
+{
+	TArray<UActorComponent*> actorComponents = this->GetComponentsByInterface(UResetable::StaticClass());
+	//UE_LOG(LogTemp, Error, TEXT("actorComponents %s"), *FString::FromInt(actorComponents.Num()));
+
+	for (int i = 0; i < actorComponents.Num(); i++)
+	{
+		IResetable* iResetablePtr = Cast<IResetable>(actorComponents[i]);
+		if (iResetablePtr)
+		{
+			allResetableComponents.Add(iResetablePtr);
+		}
+	}
+
+	//UE_LOG(LogTemp, Error, TEXT("allResetableComponents %s"), *FString::FromInt(allResetableComponents.Num()));
+}
+
+void ABBotPlayerCharacter::DoReset()
+{
+	for (int i = 0; i < allResetableComponents.Num(); i++)
+	{
+		allResetableComponents[i]->Reset();
+	}
 }
 
