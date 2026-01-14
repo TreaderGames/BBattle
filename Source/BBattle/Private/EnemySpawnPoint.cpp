@@ -19,17 +19,25 @@ void AEnemySpawnPoint::BeginPlay()
 
     //botEnemyTemplate = UGameplayStatics::GetActorOfClass(GetWorld(), ABBotEnemyPawn::StaticClass());
 	
-    if (GetWorld() && IsValid(botEnemySubclass))
-    {
-        FActorSpawnParameters spawnParam;
-        spawnParam.Name = FName(TEXT("SomeNameamirite"));
-
-        ABBotEnemyPawn* spawnedPawn =  GetWorld()->SpawnActor<ABBotEnemyPawn>(botEnemySubclass, this->GetActorLocation(), FRotator::ZeroRotator, spawnParam);
-        spawnedPawn->SetOwner(spawnedPawn);
-    }
 }
 
 void AEnemySpawnPoint::Tick(float DeltaTime)
 {
+}
+
+AActor* AEnemySpawnPoint::SpawnEnemyBot(FEnemyData enemyData)
+{
+    if (IsValid(botEnemySubclass))
+    {
+        FActorSpawnParameters spawnParam;
+        //spawnParam.Name = FName(TEXT("SomeNameamirite"));
+
+        ABBotEnemyPawn* spawnedPawn = GetWorld()->SpawnActor<ABBotEnemyPawn>(botEnemySubclass, this->GetActorLocation(), FRotator::ZeroRotator, spawnParam);
+        spawnedPawn->SetOwner(spawnedPawn);
+
+        return spawnedPawn->GetOwner();
+    }
+
+    return nullptr;
 }
 

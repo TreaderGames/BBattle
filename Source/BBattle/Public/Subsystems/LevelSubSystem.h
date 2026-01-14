@@ -7,6 +7,7 @@
 #include "LevelDataAsset.h"
 #include "BBotPlayerCharacter.h"
 #include "BBotEnemyPawn.h"
+#include "EnemySpawnPoint.h"
 #include "LevelSubSystem.generated.h"
 
 /**
@@ -21,7 +22,7 @@ protected:
 
 	int currentLevel;
 
-	TArray<FVector> enemySpawnLocations;
+	TArray<AEnemySpawnPoint*> enemySpawnPoints;
 
 	FVector playerSpawnLocation;
 
@@ -29,9 +30,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Level")
 	AActor* bbotPlayer;
-
-	UPROPERTY(EditAnywhere, Category = "Level")
-	AActor* bbotEnemyPawnTemplate;
 
 	UWorld* world;
 
@@ -46,7 +44,6 @@ protected:
 	void ToggleActor(AActor* actor, bool value);
 
 	void ClearEnemies();
-
 
 public:
 

@@ -37,7 +37,7 @@ void ABBotPlayerCharacter::Tick(float DeltaTime)
 
 	Look();
 
-	if (PC && PC->IsInputKeyDown(EKeys::SpaceBar))
+	if (PC && PC->IsInputKeyDown(EKeys::SpaceBar)) //Testing only
 	{
 		UE_LOG(LogTemp, Warning, TEXT("SpaceBar is currently held down"));
 		DoReset();

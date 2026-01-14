@@ -8,38 +8,41 @@
 
 void ULevelSubSystem::GetSpawnPoints()
 {
-	TArray<AActor*> enemySpawnPoints;
 	TArray<AActor*> playerSpawnPoints;
+	TArray<AActor*> enemySpawnActors;
 
 	FVector posVector;
 
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(), levelDataAsset->enemySpawnTag, enemySpawnPoints);
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemySpawnPoint::StaticClass(), enemySpawnActors);
 	UGameplayStatics::GetAllActorsWithTag(GetWorld(), levelDataAsset->playerSpawnTag, playerSpawnPoints);
 
-	for (int i = 0; i < enemySpawnPoints.Num(); i++)
+	enemySpawnPoints.Empty();
+	for (int i = 0; i < enemySpawnActors.Num(); i++)
 	{
-		posVector = enemySpawnPoints[i]->GetActorLocation();
-		enemySpawnLocations.Add(posVector);
+		AEnemySpawnPoint* enemySpawnPoint = Cast<AEnemySpawnPoint>(enemySpawnActors[i]);
+		enemySpawnPoints.Add(enemySpawnPoint);
 	}
 
 	posVector = playerSpawnPoints[0]->GetActorLocation();
 	playerSpawnLocation = posVector;
 
-	UE_LOG(LogTemp, Error, TEXT("Spawn count: %s _ %s"), *FString::FromInt(enemySpawnLocations.Num()), *FString::FromInt(playerSpawnPoints.Num()));
+	UE_LOG(LogTemp, Error, TEXT("Spawn count: %s _ %s"), *FString::FromInt(enemySpawnPoints.Num()), *FString::FromInt(playerSpawnPoints.Num()));
 }
 
 void ULevelSubSystem::SpawnEnemies()
 {
-	//if (!IsValid(bbotEnemyPawnTemplate))
-	//{
-	//	bbotEnemyPawnTemplate = UGameplayStatics::GetActorOfClass(GetWorld(), ABBotEnemyPawn::StaticClass());
-	//}
-
 	ClearEnemies();
 
 	TArray<FEnemyData> enemyDataArr = levelDataAsset->levelDataArr[currentLevel].enemyDataArr;
 
-	//ToggleActor(bbotEnemyPawnTemplate, false);
+	for (int i = 0; i < enemyDataArr.Num(); i++)
+	{
+		if (i < enemySpawnPoints.Num())
+		{
+			AActor* enemyActor = enemySpawnPoints[i]->SpawnEnemyBot(enemyDataArr[i]);
+			enemyBots.Add(enemyActor);
+		}
+	}
 }
 
 void ULevelSubSystem::SpawnPlayer()
@@ -87,7 +90,12 @@ FLevelData ULevelSubSystem::GetCurrentLevelData()
 
 void ULevelSubSystem::InitLevel()
 {
-	GetSpawnPoints();
+	ClearEnemies();
+
+	if (enemySpawnPoints.IsEmpty()) {
+		GetSpawnPoints();
+	}
+
 	SpawnPlayer();
 	SpawnEnemies();
 }

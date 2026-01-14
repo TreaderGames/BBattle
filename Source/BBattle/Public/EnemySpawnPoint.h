@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "LevelDataAsset.h"
 #include "EnemySpawnPoint.generated.h"
 
 UCLASS()
@@ -28,5 +29,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	AActor* SpawnEnemyBot(FEnemyData enemyData);
 
 };
