@@ -12,13 +12,25 @@ void UEnemyAbilityComponent::HandleNextInterval(int32 index)
 {
 	Super::HandleNextInterval(index);
 
-	FAbilityData abilityData = abilityArr[index];
-
-	//GEngine->AddOnScreenDebugMessage(-5, 2, FColor::Blue, "UEnemyAbilityComponent Interval Index " + FString::FromInt(index));
-	//GEngine->AddOnScreenDebugMessage(-7, 2, FColor::Blue, "UEnemyAbilityComponent abilityBaseCollection " + FString::FromInt(abilityBaseCollection.Num()));
-
-	for (int32 i = 0; i < abilityBaseCollection.Num(); i++)
+	if (abilityArr.Num() > index)
 	{
-		abilityBaseCollection[i]->TriggerAbility(abilityData);
+		FAbilityData abilityData = abilityArr[index];
+
+		//GEngine->AddOnScreenDebugMessage(-5, 2, FColor::Blue, "UEnemyAbilityComponent Interval Index " + FString::FromInt(index));
+		//GEngine->AddOnScreenDebugMessage(-7, 2, FColor::Blue, "UEnemyAbilityComponent abilityBaseCollection " + FString::FromInt(abilityBaseCollection.Num()));
+
+		for (int32 i = 0; i < abilityBaseCollection.Num(); i++)
+		{
+			abilityBaseCollection[i]->TriggerAbility(abilityData);
+		}
 	}
+}
+
+void UEnemyAbilityComponent::InitAbilities(FEnemyData enemyData)
+{
+	abilityArr = enemyData.abilityArr;
+
+	UE_LOG(LogTemp, Error, TEXT("enemyData size: %s"), *FString::FromInt(enemyData.abilityArr.Num()));
+
+	intervalWatch->ResetValue();
 }

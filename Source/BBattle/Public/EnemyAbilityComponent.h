@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilityComponentBase.h"
+#include <LevelDataAsset.h>
 #include "EnemyAbilityComponent.generated.h"
 
 /**
@@ -16,11 +17,15 @@ class BBATTLE_API UEnemyAbilityComponent : public UAbilityComponentBase
 	
 protected:
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	//UPROPERTY(EditAnywhere, Category = "Ability")
 	TArray<FAbilityData> abilityArr;
 
 	virtual void BeginPlay() override;
 
 	virtual void HandleNextInterval(int32 index) override;
+
+public:
+
+	void InitAbilities(FEnemyData enemyData);
 
 };

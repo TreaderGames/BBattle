@@ -2,6 +2,7 @@
 
 
 #include "BBotEnemyPawn.h"
+#include <LevelDataAsset.cpp>
 
 // Sets default values
 ABBotEnemyPawn::ABBotEnemyPawn()
@@ -30,5 +31,12 @@ void ABBotEnemyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ABBotEnemyPawn::UpdateEnemyData(FEnemyData enemyData)
+{
+	UEnemyAbilityComponent* enemyAbilityComp = GetComponentByClass<UEnemyAbilityComponent>();
+
+	enemyAbilityComp->InitAbilities(enemyData);
 }
 

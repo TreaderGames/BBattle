@@ -34,6 +34,7 @@ AActor* AEnemySpawnPoint::SpawnEnemyBot(FEnemyData enemyData)
 
         ABBotEnemyPawn* spawnedPawn = GetWorld()->SpawnActor<ABBotEnemyPawn>(botEnemySubclass, this->GetActorLocation(), FRotator::ZeroRotator, spawnParam);
         spawnedPawn->SetOwner(spawnedPawn);
+        spawnedPawn->UpdateEnemyData(enemyData);
 
         return spawnedPawn->GetOwner();
     }

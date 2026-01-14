@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "IntervalWatch.h"
 #include "GameFramework/DefaultPawn.h"
+#include "EnemyAbilityComponent.h"
 #include "BBotEnemyPawn.generated.h"
 
 UCLASS()
@@ -29,5 +30,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void UpdateEnemyData(FEnemyData enemyData);
 
 };

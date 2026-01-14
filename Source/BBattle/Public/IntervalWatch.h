@@ -32,6 +32,8 @@ public:
 
 	FOnNextInterval OnNextInterval;
 
+	void ResetValue();
+
 private:
 
 	float intervalDuration;
@@ -42,6 +44,5 @@ private:
 	AActor* owningActor;
 
 	void HandleNextInterval();
-	void ResetValue();
 	void UpdateTick(float delta);
 };
