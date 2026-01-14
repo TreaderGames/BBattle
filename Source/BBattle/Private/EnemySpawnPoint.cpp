@@ -25,7 +25,7 @@ void AEnemySpawnPoint::Tick(float DeltaTime)
 {
 }
 
-AActor* AEnemySpawnPoint::SpawnEnemyBot(FEnemyData enemyData)
+ABBotEnemyPawn* AEnemySpawnPoint::SpawnEnemyBot(FEnemyData enemyData)
 {
     if (IsValid(botEnemySubclass))
     {
@@ -33,10 +33,10 @@ AActor* AEnemySpawnPoint::SpawnEnemyBot(FEnemyData enemyData)
         //spawnParam.Name = FName(TEXT("SomeNameamirite"));
 
         ABBotEnemyPawn* spawnedPawn = GetWorld()->SpawnActor<ABBotEnemyPawn>(botEnemySubclass, this->GetActorLocation(), FRotator::ZeroRotator, spawnParam);
-        spawnedPawn->SetOwner(spawnedPawn);
+        //spawnedPawn->SetOwner(spawnedPawn);
         spawnedPawn->UpdateEnemyData(enemyData);
 
-        return spawnedPawn->GetOwner();
+        return spawnedPawn;
     }
 
     return nullptr;

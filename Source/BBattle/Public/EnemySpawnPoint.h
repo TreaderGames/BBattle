@@ -30,6 +30,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	AActor* SpawnEnemyBot(FEnemyData enemyData);
+	ABBotEnemyPawn* SpawnEnemyBot(FEnemyData enemyData);
 
 };

@@ -9,6 +9,7 @@
 //Custom
 #include "UUtility.h"
 #include "MovementActorComponent.h"
+#include <Subsystems/LevelSubSystem.h>
 
 
 // Sets default values
@@ -37,11 +38,17 @@ void ABBotPlayerCharacter::Tick(float DeltaTime)
 
 	Look();
 
-	if (PC && PC->IsInputKeyDown(EKeys::SpaceBar)) //Testing only
+	if (PC) //Testing only
 	{
-		UE_LOG(LogTemp, Warning, TEXT("SpaceBar is currently held down"));
-		DoReset();
-		// Handle your logic here
+		bool bIsSpaceBarDown = PC->IsInputKeyDown(EKeys::SpaceBar);
+		if (bIsSpaceBarDown && !bWasSpaceBarDown)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("SpaceBar just pressed (once)"));
+			// Your single-press logic here
+			DoReset();
+			GetWorld()->GetGameInstance()->GetSubsystem<ULevelSubSystem>()->InitLevel();
+		}
+		bWasSpaceBarDown = bIsSpaceBarDown;
 	}
 }
 

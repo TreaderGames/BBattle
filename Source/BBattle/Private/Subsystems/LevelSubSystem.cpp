@@ -31,15 +31,13 @@ void ULevelSubSystem::GetSpawnPoints()
 
 void ULevelSubSystem::SpawnEnemies()
 {
-	ClearEnemies();
-
 	TArray<FEnemyData> enemyDataArr = levelDataAsset->levelDataArr[currentLevel].enemyDataArr;
 
 	for (int i = 0; i < enemyDataArr.Num(); i++)
 	{
 		if (i < enemySpawnPoints.Num())
 		{
-			AActor* enemyActor = enemySpawnPoints[i]->SpawnEnemyBot(enemyDataArr[i]);
+			ABBotEnemyPawn* enemyActor = enemySpawnPoints[i]->SpawnEnemyBot(enemyDataArr[i]);
 			enemyBots.Add(enemyActor);
 		}
 	}
@@ -71,9 +69,15 @@ void ULevelSubSystem::ToggleActor(AActor* actor, bool value)
 
 void ULevelSubSystem::ClearEnemies()
 {
-	for (int i = 0; i < enemyBots.Num(); i++)
+	//UE_LOG(LogTemp, Error, TEXT("ClearEnemies %s"), *FString::FromInt(enemyBots.Num()));
+
+	if (!enemyBots.IsEmpty())
 	{
-		enemyBots[i]->Destroy();
+		for (int i = 0; i < enemyBots.Num(); i++)
+		{
+			GetWorld()->DestroyActor(enemyBots[i]);
+			//UE_LOG(LogTemp, Error, TEXT("ClearEnemies %s"), *FString::FromInt(i));
+		}
 	}
 
 	enemyBots.Empty();

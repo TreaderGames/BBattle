@@ -56,6 +56,8 @@ protected:
 
 	APlayerController* PC;
 
+	bool bWasSpaceBarDown;
+
 private:
 	UWorld* worldPtr;
 };

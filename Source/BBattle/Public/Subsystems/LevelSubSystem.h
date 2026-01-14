@@ -33,7 +33,7 @@ protected:
 
 	UWorld* world;
 
-	TArray<AActor*> enemyBots;
+	TArray<ABBotEnemyPawn*> enemyBots;
 
 	void GetSpawnPoints();
 

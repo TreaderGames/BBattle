@@ -30,7 +30,7 @@ void UEnemyAbilityComponent::InitAbilities(FEnemyData enemyData)
 {
 	abilityArr = enemyData.abilityArr;
 
-	UE_LOG(LogTemp, Error, TEXT("enemyData size: %s"), *FString::FromInt(enemyData.abilityArr.Num()));
-
 	intervalWatch->ResetValue();
+
+	//UE_LOG(LogTemp, Error, TEXT("enemyData size: %s"), *FString::FromInt(enemyData.abilityArr.Num()));
 }
