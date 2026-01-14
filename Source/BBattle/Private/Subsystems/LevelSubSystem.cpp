@@ -30,12 +30,16 @@ void ULevelSubSystem::GetSpawnPoints()
 
 void ULevelSubSystem::SpawnEnemies()
 {
-	if (!IsValid(bbotEnemyPawnTemplate))
-	{
-		bbotEnemyPawnTemplate = UGameplayStatics::GetActorOfClass(GetWorld(), ABBotEnemyPawn::StaticClass());
-	}
+	//if (!IsValid(bbotEnemyPawnTemplate))
+	//{
+	//	bbotEnemyPawnTemplate = UGameplayStatics::GetActorOfClass(GetWorld(), ABBotEnemyPawn::StaticClass());
+	//}
 
-	ToggleActor(bbotEnemyPawnTemplate, false);
+	ClearEnemies();
+
+	TArray<FEnemyData> enemyDataArr = levelDataAsset->levelDataArr[currentLevel].enemyDataArr;
+
+	//ToggleActor(bbotEnemyPawnTemplate, false);
 }
 
 void ULevelSubSystem::SpawnPlayer()
@@ -46,19 +50,30 @@ void ULevelSubSystem::SpawnPlayer()
 	}
 
 	if (IsValid(bbotPlayer))
-	{
+	{	
 		bbotPlayer->SetActorLocation(playerSpawnLocation);
 	}
 }
 
 void ULevelSubSystem::ToggleActor(AActor* actor, bool value)
 {
-	actor->SetActorHiddenInGame(!value);
-
-	for (UActorComponent* actorComp : actor->GetComponents())
-	{
-		UE_LOG(LogTemp, Error, TEXT("Actor Comp: %s"), *actorComp->GetName());
+	if (IsValid(actor)) {
+		actor->SetActorHiddenInGame(!value);
 	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("ToggleActor Actor not valid"));
+	}
+}
+
+void ULevelSubSystem::ClearEnemies()
+{
+	for (int i = 0; i < enemyBots.Num(); i++)
+	{
+		enemyBots[i]->Destroy();
+	}
+
+	enemyBots.Empty();
 }
 
 #pragma endregion
@@ -80,6 +95,8 @@ void ULevelSubSystem::InitLevel()
 void ULevelSubSystem::InitSubsystem(ULevelDataAsset* levelData)
 {
 	levelDataAsset = levelData;
+	currentLevel = 0;
+	world = GetWorld();
 }
 #pragma endregion
 

@@ -25,7 +25,12 @@ void UMovementActorComponent::BeginPlay()
 	controller = pawn->GetController();
 	healthComponent = GetOwner()->GetComponentByClass<UHealthComponent>();
 
-	UE_LOG(LogTemp, Error, TEXT("controller %s"), *pawn->GetFName().ToString());
+	UE_LOG(LogTemp, Error, TEXT("pawn %s"), *pawn->GetFName().ToString());
+
+	if (IsValid(controller))
+	{
+		UE_LOG(LogTemp, Error, TEXT("controller is valid%s"), *controller->GetFName().ToString())
+	}
 
 	if (IsValid(healthComponent)) {
 		UE_LOG(LogTemp, Error, TEXT("healthComponent is valid"));
@@ -55,9 +60,10 @@ void UMovementActorComponent::Move(FVector2D inputVector)
 
 void UMovementActorComponent::MoveTowards(FVector inputVector, float speed, double dist)
 {
+	//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer healthComponent 0"));
 	if (!pawn->IsHidden() && IsValid(healthComponent) && healthComponent->GetIsAlive())
 	{
-		//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer healthComponent"));
+		//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer healthComponent 1"));
 		FVector currentPos = pawn->GetActorLocation();
 
 		if (FVector::Distance(currentPos, inputVector) >= dist) {
@@ -72,7 +78,7 @@ void UMovementActorComponent::MoveTowards(FVector inputVector, float speed, doub
 			LookRotate(dirVector);
 			pawn->AddMovementInput(dirVector, speed);
 
-			//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer %f"), FVector::Distance(currentPos, inputVector));
+			//UE_LOG(LogTemp, Error, TEXT("MoveTowardsPlayer %f _ %s _ %s _ %f"), FVector::Distance(currentPos, inputVector), *pawn->GetName(), *dirVector.ToString(), speed);
 		}
 	}
 }

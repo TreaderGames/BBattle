@@ -32,7 +32,6 @@ void UMeleeAttackAbility::TriggerAbility(FAbilityData abilityData)
 
 void UMeleeAttackAbility::MeleeAttackTickNotify()
 {
-	UE_LOG(LogTemp, Error, TEXT("MeleeAttackTickNotify 1"));
     if (!IsValid(hitStart))
     {
         UE_LOG(LogTemp, Error, TEXT("Hit start not found"));
@@ -47,7 +46,6 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
     queryParams.AddIgnoredActor(owner); // Ignore self in trace
 
     FHitResult hit;
-    UE_LOG(LogTemp, Error, TEXT("MeleeAttackTickNotify 3"));
     bool bHit = worldPtr->LineTraceSingleByChannel(
         hit,
         traceStart,
@@ -55,7 +53,6 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
         ECC_Visibility,
         queryParams
     );
-    UE_LOG(LogTemp, Error, TEXT("MeleeAttackTickNotify 4"));
     // Optional: Draw debug line to visualize trace
     //DrawDebugLine(worldPtr, traceStart, traceEnd, FColor::Green, false, 2.0f);
     //DrawDebugSphere(worldPtr, traceStart, 10.0f, 1, FColor::Green, false, 3.0f);

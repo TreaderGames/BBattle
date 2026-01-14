@@ -33,6 +33,10 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Level")
 	AActor* bbotEnemyPawnTemplate;
 
+	UWorld* world;
+
+	TArray<AActor*> enemyBots;
+
 	void GetSpawnPoints();
 
 	void SpawnEnemies();
@@ -40,6 +44,8 @@ protected:
 	void SpawnPlayer();
 
 	void ToggleActor(AActor* actor, bool value);
+
+	void ClearEnemies();
 
 
 public:
