@@ -9,6 +9,9 @@
 /**
  * 
  */
+UDELEGATE(BlueprintCallable)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameOver, bool, isWin);
+
 UCLASS()
 class BBATTLE_API UGameStateSubSystem : public UGameInstanceSubsystem
 {
@@ -18,4 +21,6 @@ public:
 
 	void TriggerGameOver(bool isWin);
 	
+	UPROPERTY(EditAnywhere, BlueprintAssignable);
+	FOnGameOver OnGameOver;
 };
