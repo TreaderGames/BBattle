@@ -8,6 +8,8 @@
 #include "Interfaces/IResetable.h"
 #include "HealthComponent.generated.h"
 
+//UDELEGATE()
+DECLARE_DELEGATE(FOnDefeated);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BBATTLE_API UHealthComponent : public UActorComponent, public IResetable
@@ -39,4 +41,6 @@ public:
 	bool GetIsAlive();
 
 	virtual void Reset() override;
+
+	FOnDefeated OnDefeated;
 };

@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Kismet/GameplayStatics.h"
+#include "Subsystems/GameStateSubSystem.h"
 #include "Subsystems/LevelSubSystem.h"
 
 #pragma region Protected
@@ -26,7 +27,7 @@ void ULevelSubSystem::GetSpawnPoints()
 	posVector = playerSpawnPoints[0]->GetActorLocation();
 	playerSpawnLocation = posVector;
 
-	UE_LOG(LogTemp, Error, TEXT("Spawn count: %s _ %s"), *FString::FromInt(enemySpawnPoints.Num()), *FString::FromInt(playerSpawnPoints.Num()));
+	//UE_LOG(LogTemp, Error, TEXT("Spawn count: %s _ %s"), *FString::FromInt(enemySpawnPoints.Num()), *FString::FromInt(playerSpawnPoints.Num()));
 }
 
 void ULevelSubSystem::SpawnEnemies()
@@ -39,6 +40,9 @@ void ULevelSubSystem::SpawnEnemies()
 		{
 			ABBotEnemyPawn* enemyActor = enemySpawnPoints[i]->SpawnEnemyBot(enemyDataArr[i]);
 			enemyBots.Add(enemyActor);
+
+			FOnDefeated* onDefeated = enemyActor->GetOnDefeated();
+			onDefeated->BindUObject(this, &ULevelSubSystem::HandleEnemyDefeated);
 		}
 	}
 }
@@ -70,11 +74,13 @@ void ULevelSubSystem::ToggleActor(AActor* actor, bool value)
 void ULevelSubSystem::ClearEnemies()
 {
 	//UE_LOG(LogTemp, Error, TEXT("ClearEnemies %s"), *FString::FromInt(enemyBots.Num()));
+	defeatedEnemyCount = 0;
 
 	if (!enemyBots.IsEmpty())
 	{
 		for (int i = 0; i < enemyBots.Num(); i++)
 		{
+			enemyBots[i]->ClearBeforeDestroy();
 			GetWorld()->DestroyActor(enemyBots[i]);
 			//UE_LOG(LogTemp, Error, TEXT("ClearEnemies %s"), *FString::FromInt(i));
 		}
@@ -83,13 +89,24 @@ void ULevelSubSystem::ClearEnemies()
 	enemyBots.Empty();
 }
 
+void ULevelSubSystem::HandleEnemyDefeated()
+{
+	defeatedEnemyCount++;
+	UE_LOG(LogTemp, Error, TEXT("HandleEnemyDefeated"));
+	if (defeatedEnemyCount >= GetCurrentLevelData().enemyDataArr.Num())
+	{
+		UGameStateSubSystem* gameStateSubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UGameStateSubSystem>();
+		gameStateSubSystem->TriggerGameOver(true);	
+	}
+}
+
 #pragma endregion
 
 #pragma region Public
 
 FLevelData ULevelSubSystem::GetCurrentLevelData()
 {
-	return FLevelData();
+	return levelDataAsset->levelDataArr[currentLevel];
 }
 
 void ULevelSubSystem::InitLevel()

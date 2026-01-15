@@ -52,6 +52,9 @@ void UHealthComponent::DealDamage(int32 damage)
 		}
 
 		animationComponent->PlayAnimation(AnimationKey::Death);
+
+		OnDefeated.ExecuteIfBound();
+		//UE_LOG(LogTemp, Error, TEXT("OnDefeated %d"), currentHealth);
 	}
 
 	UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);

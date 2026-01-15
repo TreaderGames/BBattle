@@ -6,7 +6,9 @@
 #include "IntervalWatch.h"
 #include "GameFramework/DefaultPawn.h"
 #include "EnemyAbilityComponent.h"
+#include <HealthComponent.h>
 #include "BBotEnemyPawn.generated.h"
+
 
 UCLASS()
 class BBATTLE_API ABBotEnemyPawn : public ADefaultPawn
@@ -24,6 +26,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability");
 	TObjectPtr<UIntervalWatch> intervalWatch;
 
+	TObjectPtr<UHealthComponent> healthComponent;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -33,4 +37,7 @@ public:
 
 	void UpdateEnemyData(FEnemyData enemyData);
 
+	FOnDefeated* GetOnDefeated();
+
+	void ClearBeforeDestroy();
 };

@@ -13,6 +13,7 @@
 /**
  * 
  */
+
 UCLASS()
 class BBATTLE_API ULevelSubSystem : public UGameInstanceSubsystem
 {
@@ -21,6 +22,8 @@ class BBATTLE_API ULevelSubSystem : public UGameInstanceSubsystem
 protected:
 
 	int currentLevel;
+
+	int defeatedEnemyCount;
 
 	TArray<AEnemySpawnPoint*> enemySpawnPoints;
 
@@ -44,6 +47,8 @@ protected:
 	void ToggleActor(AActor* actor, bool value);
 
 	void ClearEnemies();
+
+	void HandleEnemyDefeated();
 
 public:
 

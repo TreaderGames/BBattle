@@ -17,7 +17,7 @@ void UMeleeAttackAbility::TriggerAbility(FAbilityData abilityData)
 
 	if (abilityData.abilityType == abilityType) 
 	{
-		UE_LOG(LogTemp, Error, TEXT("TriggerAbility"));
+		//UE_LOG(LogTemp, Error, TEXT("TriggerAbility"));
 
 		if (!IsValid(animComp))
 		{
@@ -59,15 +59,15 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
 
     if (bHit)
     {
-        UE_LOG(LogTemp, Error, TEXT("Hit Actor: %s at Location: %s"),
+        /*UE_LOG(LogTemp, Error, TEXT("Hit Actor: %s at Location: %s"),
             *hit.GetActor()->GetName(),
-            *hit.ImpactPoint.ToString());
+            *hit.ImpactPoint.ToString());*/
 
         healthComponent = hit.GetActor()->GetComponentByClass<UHealthComponent>();
 
         if (IsValid(healthComponent))
         {
-            UE_LOG(LogTemp, Error, TEXT("Deal damage"));
+            //UE_LOG(LogTemp, Error, TEXT("Deal damage"));
             healthComponent->DealDamage(damage);
         }
     }

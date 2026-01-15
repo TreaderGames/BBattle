@@ -3,6 +3,7 @@
 
 #include "BBotEnemyPawn.h"
 #include <LevelDataAsset.cpp>
+#include "Subsystems/LevelSubSystem.h"
 
 // Sets default values
 ABBotEnemyPawn::ABBotEnemyPawn()
@@ -17,6 +18,8 @@ ABBotEnemyPawn::ABBotEnemyPawn()
 void ABBotEnemyPawn::BeginPlay()
 {
 	Super::BeginPlay();
+
+	healthComponent = GetComponentByClass<UHealthComponent>();
 }
 
 // Called every frame
@@ -38,5 +41,16 @@ void ABBotEnemyPawn::UpdateEnemyData(FEnemyData enemyData)
 	UEnemyAbilityComponent* enemyAbilityComp = GetComponentByClass<UEnemyAbilityComponent>();
 
 	enemyAbilityComp->InitAbilities(enemyData);
+}
+
+FOnDefeated* ABBotEnemyPawn::GetOnDefeated()
+{
+	//UE_LOG(LogTemp, Error, TEXT("RegisterDefeat"));
+	return &healthComponent->OnDefeated;// .BindUObject(uobject, &ULevelSubSystem::HandleEnemyDefeated);
+}
+
+void ABBotEnemyPawn::ClearBeforeDestroy()
+{
+	//healthComponent->OnDefeated.Unbind();
 }
 
