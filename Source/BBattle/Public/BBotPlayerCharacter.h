@@ -44,6 +44,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability");
 	TObjectPtr<UIntervalWatch> intervalWatch;
 
+	TObjectPtr<UHealthComponent> healthComponent;
+
 	TArray<IResetable*> allResetableComponents;
 
 	void Move(const FInputActionValue& value);
@@ -53,6 +55,8 @@ protected:
 	void UpdateResetableComponent();
 
 	void DoReset();
+
+	void HandleDefeat();
 
 	APlayerController* PC;
 

@@ -10,6 +10,7 @@
 #include "UUtility.h"
 #include "MovementActorComponent.h"
 #include <Subsystems/LevelSubSystem.h>
+#include "Subsystems/GameStateSubSystem.h"
 
 
 // Sets default values
@@ -29,6 +30,9 @@ void ABBotPlayerCharacter::BeginPlay()
 
 	PC = GetWorld()->GetFirstPlayerController();
 	UpdateResetableComponent();
+	healthComponent = GetComponentByClass<UHealthComponent>();
+
+	healthComponent->OnDefeated.BindUObject(this, &ABBotPlayerCharacter::HandleDefeat);
 }
 
 // Called every frame
@@ -38,7 +42,7 @@ void ABBotPlayerCharacter::Tick(float DeltaTime)
 
 	Look();
 
-	if (PC) //Testing only
+	/*if (PC) //Testing only
 	{
 		bool bIsSpaceBarDown = PC->IsInputKeyDown(EKeys::SpaceBar);
 		if (bIsSpaceBarDown && !bWasSpaceBarDown)
@@ -49,7 +53,7 @@ void ABBotPlayerCharacter::Tick(float DeltaTime)
 			GetWorld()->GetGameInstance()->GetSubsystem<ULevelSubSystem>()->InitLevel();
 		}
 		bWasSpaceBarDown = bIsSpaceBarDown;
-	}
+	}*/
 }
 
 // Called to bind functionality to input
@@ -119,5 +123,11 @@ void ABBotPlayerCharacter::DoReset()
 	{
 		allResetableComponents[i]->Reset();
 	}
+}
+
+void ABBotPlayerCharacter::HandleDefeat()
+{
+	UGameStateSubSystem* gameStateSubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UGameStateSubSystem>();
+	gameStateSubSystem->TriggerGameOver(false);
 }
 
