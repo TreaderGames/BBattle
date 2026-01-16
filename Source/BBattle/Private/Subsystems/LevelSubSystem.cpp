@@ -142,5 +142,11 @@ void ULevelSubSystem::InitSubsystem(ULevelDataAsset* levelData)
 	currentLevel = 0;
 	world = GetWorld();
 }
+
+
+int ULevelSubSystem::GetCurrentLevel()
+{
+	return currentLevel;
+}
 #pragma endregion
 
