@@ -31,6 +31,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void DoReset();
+
 	UPROPERTY(VisibleAnywhere, Category = "Custom Component");
 	class UMovementActorComponent* movementComponent;
 
@@ -54,7 +56,6 @@ protected:
 
 	void UpdateResetableComponent();
 
-	void DoReset();
 
 	void HandleDefeat();
 

@@ -58,6 +58,9 @@ void ULevelSubSystem::SpawnPlayer()
 	if (IsValid(bbotPlayer))
 	{	
 		bbotPlayer->SetActorLocation(playerSpawnLocation);
+
+		ABBotPlayerCharacter* playerCharacter = Cast<ABBotPlayerCharacter>(bbotPlayer);
+		playerCharacter->DoReset();
 	}
 }
 
