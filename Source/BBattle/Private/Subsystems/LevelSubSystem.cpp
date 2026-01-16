@@ -151,5 +151,17 @@ int ULevelSubSystem::GetCurrentLevel()
 {
 	return currentLevel;
 }
+
+void ULevelSubSystem::SetCurrentLevel(int value)
+{
+	currentLevel = 0;
+}
+void ULevelSubSystem::HidePlayer()
+{
+	ABBotPlayerCharacter* playerCharacter = Cast<ABBotPlayerCharacter>(bbotPlayer);
+	playerCharacter->DoReset();
+
+	bbotPlayer->SetActorLocation(FVector::ForwardVector * 900);
+}
 #pragma endregion
 

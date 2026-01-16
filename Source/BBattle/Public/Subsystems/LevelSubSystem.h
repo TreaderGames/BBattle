@@ -65,4 +65,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int GetCurrentLevel();
 
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentLevel(int value);
+
+	UFUNCTION(BlueprintCallable)
+	void HidePlayer();
+
 };

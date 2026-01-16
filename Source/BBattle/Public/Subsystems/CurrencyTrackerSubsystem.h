@@ -34,6 +34,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateCurrencyCount(int32 count);
 
+	UFUNCTION(BlueprintCallable)
+	void ResetCurrency();
+
 	void InitSubsystem(UGameConfig* config);
 
 	UPROPERTY(EditAnywhere, BlueprintAssignable, Category = "Ability");

@@ -20,6 +20,12 @@ void UCurrencyTrackerSubsystem::UpdateCurrencyCount(int32 count)
 	OnCurrencyUpdate.Broadcast();
 }
 
+void UCurrencyTrackerSubsystem::ResetCurrency()
+{
+	currencyCount = gameConfig->defaultCredits;
+	OnCurrencyUpdate.Broadcast();
+}
+
 void UCurrencyTrackerSubsystem::InitSubsystem(UGameConfig* config)
 {
 	gameConfig = config;
