@@ -50,6 +50,8 @@ protected:
 
 	void HandleEnemyDefeated();
 
+	void HandleLevelWin();
+
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Ability")

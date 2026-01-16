@@ -3,6 +3,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Subsystems/GameStateSubSystem.h"
 #include "Subsystems/LevelSubSystem.h"
+#include <Subsystems/CurrencyTrackerSubsystem.h>
 
 #pragma region Protected
 
@@ -96,8 +97,22 @@ void ULevelSubSystem::HandleEnemyDefeated()
 	if (defeatedEnemyCount >= GetCurrentLevelData().enemyDataArr.Num())
 	{
 		UGameStateSubSystem* gameStateSubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UGameStateSubSystem>();
-		gameStateSubSystem->TriggerGameOver(true);	
+		gameStateSubSystem->TriggerGameOver(true);
+		HandleLevelWin();
 	}
+}
+
+void ULevelSubSystem::HandleLevelWin()
+{
+	currentLevel++;
+
+	if (currentLevel >= levelDataAsset->levelDataArr.Num())
+	{
+		currentLevel = 0;
+	}
+
+	UCurrencyTrackerSubsystem* currencySubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UCurrencyTrackerSubsystem>();
+	currencySubSystem->UpdateCurrencyCount(1);
 }
 
 #pragma endregion
