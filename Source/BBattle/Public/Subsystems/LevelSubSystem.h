@@ -63,6 +63,9 @@ public:
 	void InitSubsystem(ULevelDataAsset* levelData);
 
 	UFUNCTION(BlueprintCallable)
+	void DeInitSubsystem();
+
+	UFUNCTION(BlueprintCallable)
 	int GetCurrentLevel();
 
 	UFUNCTION(BlueprintCallable)

@@ -84,9 +84,12 @@ void ULevelSubSystem::ClearEnemies()
 	{
 		for (int i = 0; i < enemyBots.Num(); i++)
 		{
-			enemyBots[i]->ClearBeforeDestroy();
-			GetWorld()->DestroyActor(enemyBots[i]);
-			//UE_LOG(LogTemp, Error, TEXT("ClearEnemies %s"), *FString::FromInt(i));
+			if (IsValid(enemyBots[i])) 
+			{
+				enemyBots[i]->ClearBeforeDestroy();
+				GetWorld()->DestroyActor(enemyBots[i]);
+				//UE_LOG(LogTemp, Error, TEXT("ClearEnemies %s"), *FString::FromInt(i));
+			}
 		}
 	}
 
@@ -144,6 +147,12 @@ void ULevelSubSystem::InitSubsystem(ULevelDataAsset* levelData)
 	levelDataAsset = levelData;
 	currentLevel = 0;
 	world = GetWorld();
+}
+
+void ULevelSubSystem::DeInitSubsystem()
+{
+	enemySpawnPoints.Empty();
+	enemyBots.Empty();
 }
 
 
