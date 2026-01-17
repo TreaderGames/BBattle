@@ -34,17 +34,23 @@ void ULevelSubSystem::GetSpawnPoints()
 void ULevelSubSystem::SpawnEnemies()
 {
 	TArray<FEnemyData> enemyDataArr = levelDataAsset->levelDataArr[currentLevel].enemyDataArr;
+	TArray<AEnemySpawnPoint*> enemySpawnPointsTemp = enemySpawnPoints;
+
+	int randomIndex = 0;
 
 	for (int i = 0; i < enemyDataArr.Num(); i++)
 	{
-		if (i < enemySpawnPoints.Num())
-		{
-			ABBotEnemyPawn* enemyActor = enemySpawnPoints[i]->SpawnEnemyBot(enemyDataArr[i]);
-			enemyBots.Add(enemyActor);
+		randomIndex = FMath::RandRange(0, enemySpawnPointsTemp.Num() - 1);
 
-			FOnDefeated* onDefeated = enemyActor->GetOnDefeated();
-			onDefeated->BindUObject(this, &ULevelSubSystem::HandleEnemyDefeated);
-		}
+		ABBotEnemyPawn* enemyActor = enemySpawnPointsTemp[randomIndex]->SpawnEnemyBot(enemyDataArr[i]);
+		enemyBots.Add(enemyActor);
+
+		FOnDefeated* onDefeated = enemyActor->GetOnDefeated();
+		onDefeated->BindUObject(this, &ULevelSubSystem::HandleEnemyDefeated);
+
+		enemySpawnPointsTemp.RemoveAt(randomIndex);
+		//UE_LOG(LogTemp, Error, TEXT("SpawnEnemies: %s _ %s"), *FString::FromInt(enemySpawnPointsTemp.Num()), *FString::FromInt(enemySpawnPoints.Num()));
+		//UE_LOG(LogTemp, Error, TEXT("SpawnEnemies rand: %s"), *FString::FromInt(randomIndex));
 	}
 }
 
