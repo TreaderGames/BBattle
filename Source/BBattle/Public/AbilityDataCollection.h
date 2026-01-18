@@ -19,4 +19,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	TArray<FAbilityData> abilityCollection;
+
+	UFUNCTION(BlueprintCallable)
+	FAbilityData GetAbilityDataByType(EAbilityType abilityType);
 };

@@ -13,7 +13,7 @@ struct FEnemyData
 {
 	GENERATED_BODY();
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability")
 	TArray<FAbilityData> abilityArr;
 };
 
@@ -22,7 +22,7 @@ struct FLevelData
 {
 	GENERATED_BODY();
 
-	UPROPERTY(EditAnywhere, Category = "Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability")
 	TArray<FEnemyData> enemyDataArr;
 };
 
