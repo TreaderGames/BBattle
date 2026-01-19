@@ -17,9 +17,15 @@ class BBATTLE_API UGameStateSubSystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
+protected:
+
+	bool gameOverDone;
+
 public:
 
 	void TriggerGameOver(bool isWin);
+
+	void TriggerGameStart();
 	
 	UPROPERTY(EditAnywhere, BlueprintAssignable);
 	FOnGameOver OnGameOver;

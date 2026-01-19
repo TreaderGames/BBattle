@@ -110,21 +110,28 @@ void ULevelSubSystem::HandleEnemyDefeated()
 	{
 		UGameStateSubSystem* gameStateSubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UGameStateSubSystem>();
 		gameStateSubSystem->TriggerGameOver(true);
-		HandleLevelWin();
+		//HandleLevelWin();
 	}
 }
 
-void ULevelSubSystem::HandleLevelWin()
+void ULevelSubSystem::HandleLevelWin(bool isWin)
 {
-	currentLevel++;
+	UE_LOG(LogTemp, Error, TEXT("HandleLevelWin"));
+	if (isWin) {
+		currentLevel++;
 
-	if (currentLevel >= levelDataAsset->levelDataArr.Num())
+		if (currentLevel >= levelDataAsset->levelDataArr.Num())
+		{
+			currentLevel = 0;
+		}
+
+		UCurrencyTrackerSubsystem* currencySubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UCurrencyTrackerSubsystem>();
+		currencySubSystem->UpdateCurrencyCount(1);
+	}
+	else
 	{
 		currentLevel = 0;
 	}
-
-	UCurrencyTrackerSubsystem* currencySubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UCurrencyTrackerSubsystem>();
-	currencySubSystem->UpdateCurrencyCount(1);
 }
 
 #pragma endregion
@@ -138,6 +145,9 @@ FLevelData ULevelSubSystem::GetCurrentLevelData()
 
 void ULevelSubSystem::InitLevel()
 {
+	UGameStateSubSystem* gameStateSubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UGameStateSubSystem>();
+	gameStateSubSystem->TriggerGameStart();
+
 	ClearEnemies();
 
 	if (enemySpawnPoints.IsEmpty()) {
@@ -153,6 +163,9 @@ void ULevelSubSystem::InitSubsystem(ULevelDataAsset* levelData)
 	levelDataAsset = levelData;
 	currentLevel = 0;
 	world = GetWorld();
+
+	UGameStateSubSystem* gameStateSubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UGameStateSubSystem>();
+	gameStateSubSystem->OnGameOver.AddDynamic(this, &ULevelSubSystem::HandleLevelWin);
 }
 
 void ULevelSubSystem::DeInitSubsystem()

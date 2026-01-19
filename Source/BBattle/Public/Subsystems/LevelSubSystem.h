@@ -50,7 +50,8 @@ protected:
 
 	void HandleEnemyDefeated();
 
-	void HandleLevelWin();
+	UFUNCTION()
+	void HandleLevelWin(bool isWin);
 
 public:
 

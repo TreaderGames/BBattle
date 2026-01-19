@@ -7,5 +7,15 @@ void UGameStateSubSystem::TriggerGameOver(bool isWin)
 {
 	UE_LOG(LogTemp, Error, TEXT("TriggerGameOver %s"), isWin ? TEXT("true") : TEXT("false"));
 
-	OnGameOver.Broadcast(isWin);
+	if (!gameOverDone)
+	{
+		OnGameOver.Broadcast(isWin);
+
+		gameOverDone = true;
+	}
+}
+
+void UGameStateSubSystem::TriggerGameStart()
+{
+	gameOverDone = false;
 }
