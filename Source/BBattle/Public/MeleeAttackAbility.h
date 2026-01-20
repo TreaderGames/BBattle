@@ -42,6 +42,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Ability")
 	AnimationKey animKey;
 
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	TObjectPtr<USoundBase> hitSFX;
+
 	TObjectPtr<UWorld> worldPtr;
 
 	TObjectPtr<AActor> owner;

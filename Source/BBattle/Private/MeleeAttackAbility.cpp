@@ -2,6 +2,7 @@
 
 
 #include "MeleeAttackAbility.h"
+#include "Kismet/GameplayStatics.h"
 #include "HealthComponent.h"
 
 void UMeleeAttackAbility::BeginPlay()
@@ -69,6 +70,11 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
         {
             //UE_LOG(LogTemp, Error, TEXT("Deal damage"));
             healthComponent->DealDamage(damage);
+
+            if (IsValid(hitSFX))
+            {
+                UGameplayStatics::PlaySoundAtLocation(GetWorld(), hitSFX, hit.Location);
+            }
         }
     }
     else
