@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "AnimationComponent.h"
+#include "NiagaraSystem.h"
 #include "Interfaces/IResetable.h"
 #include "HealthComponent.generated.h"
 
@@ -30,6 +31,14 @@ protected:
 	int32 currentHealth;
 
 	UAnimationComponent* animationComponent;
+
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<UNiagaraSystem> niagaraHitAsset;
+
+	TObjectPtr<UNiagaraComponent> hitVFXComponent;
+
+	void ShowAttackVFX();
+
 
 public:	
 	// Called every frame

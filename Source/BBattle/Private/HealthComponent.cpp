@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponentPoolMethodEnum.h"
 #include "HealthComponent.h"
 
 // Sets default values for this component's properties
@@ -24,6 +26,19 @@ void UHealthComponent::BeginPlay()
 	
 }
 
+
+void UHealthComponent::ShowAttackVFX()
+{
+	hitVFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+		niagaraHitAsset, 
+		GetOwner()->GetRootComponent(),
+		NAME_None,
+		FVector::ZeroVector, 
+		FRotator::ZeroRotator, 
+		FVector::OneVector, 
+		EAttachLocation::KeepRelativeOffset,
+		true, ENCPoolMethod::None, true, true);
+}
 
 // Called every frame
 void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -57,6 +72,7 @@ void UHealthComponent::DealDamage(int32 damage)
 		//UE_LOG(LogTemp, Error, TEXT("OnDefeated %d"), currentHealth);
 	}
 
+	ShowAttackVFX();
 	UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);
 }
 
