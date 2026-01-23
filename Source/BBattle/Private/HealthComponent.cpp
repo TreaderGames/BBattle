@@ -50,6 +50,11 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UHealthComponent::DealDamage(int32 damage)
 {
+	if (currentHealth <= 0)
+	{
+		return;
+	}
+
 	if (damage > currentHealth)
 	{
 		currentHealth = 0;
