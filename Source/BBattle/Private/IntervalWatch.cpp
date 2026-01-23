@@ -21,7 +21,13 @@ void UIntervalWatch::BeginPlay()
 
 	owningActor = GetOwner();
 
+	gameStateSubsystem = GetWorld()->GetGameInstance()->GetSubsystem<UGameStateSubSystem>();
+	gameStateSubsystem->OnGameOver.AddDynamic(this, &UIntervalWatch::HandleGameStateOver);
+	gameStateSubsystem->OnGameStart.AddDynamic(this, &UIntervalWatch::HandleGameStateStart);
+
 	ResetValue();
+
+	canTick = true;
 }
 
 
@@ -51,13 +57,25 @@ void UIntervalWatch::UpdateTick(float delta)
 {
 	intervalDelta += delta;
 
-	if (!owningActor->IsHidden() && IsValid(gameConfig) && intervalDelta >= intervalDuration)
+	if (canTick && !owningActor->IsHidden() && IsValid(gameConfig) && intervalDelta >= intervalDuration)
 	{
 		intervalDelta = 0;
 		intervalIndex = (intervalIndex + 1) % gameConfig->maxIntervals;
 
 		HandleNextInterval();
 	}
+}
+
+void UIntervalWatch::HandleGameStateOver(bool isWin)
+{
+	UE_LOG(LogTemp, Error, TEXT("UIntervalWatch HandleGameStateOver"));
+	canTick = false;
+}
+
+void UIntervalWatch::HandleGameStateStart()
+{
+	canTick = true;
+	intervalIndex = 0;
 }
 
 

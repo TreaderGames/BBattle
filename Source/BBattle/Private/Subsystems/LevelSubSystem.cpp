@@ -67,6 +67,7 @@ void ULevelSubSystem::SpawnPlayer()
 
 		ABBotPlayerCharacter* playerCharacter = Cast<ABBotPlayerCharacter>(bbotPlayer);
 		playerCharacter->DoReset();
+		bbotPlayer->SetActorHiddenInGame(false);
 	}
 }
 
@@ -189,7 +190,8 @@ void ULevelSubSystem::HidePlayer()
 	ABBotPlayerCharacter* playerCharacter = Cast<ABBotPlayerCharacter>(bbotPlayer);
 	playerCharacter->DoReset();
 
-	bbotPlayer->SetActorLocation(FVector::ForwardVector * 900);
+	//bbotPlayer->SetActorLocation(FVector::ForwardVector * 900);
+	bbotPlayer->SetActorHiddenInGame(true);
 }
 #pragma endregion
 

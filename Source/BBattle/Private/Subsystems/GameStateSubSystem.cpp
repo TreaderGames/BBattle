@@ -18,4 +18,6 @@ void UGameStateSubSystem::TriggerGameOver(bool isWin)
 void UGameStateSubSystem::TriggerGameStart()
 {
 	gameOverDone = false;
+
+	OnGameStart.Broadcast();
 }

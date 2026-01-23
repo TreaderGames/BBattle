@@ -12,6 +12,8 @@
 //UDELEGATE()
 DECLARE_DELEGATE(FOnDefeated);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDamageTaken, int32, healthValue);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BBATTLE_API UHealthComponent : public UActorComponent, public IResetable
 {
@@ -45,6 +47,9 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void DealDamage(int32 damage);
+	
+	UFUNCTION(BlueprintCallable)
+	int GetMaxHealth();
 
 	UFUNCTION(BlueprintCallable)
 	bool GetIsAlive();
@@ -52,4 +57,7 @@ public:
 	virtual void Reset() override;
 
 	FOnDefeated OnDefeated;
+
+	UPROPERTY(EditAnywhere, BlueprintAssignable);
+	FOnDamageTaken OnDamageTaken;
 };

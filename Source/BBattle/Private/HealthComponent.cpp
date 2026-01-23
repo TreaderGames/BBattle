@@ -59,6 +59,8 @@ void UHealthComponent::DealDamage(int32 damage)
 		currentHealth -= damage;
 	}
 
+	OnDamageTaken.Broadcast(currentHealth);
+
 	if (currentHealth <= 0)
 	{
 		if (!IsValid(animationComponent))
@@ -74,6 +76,11 @@ void UHealthComponent::DealDamage(int32 damage)
 
 	ShowAttackVFX();
 	UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);
+}
+
+int UHealthComponent::GetMaxHealth()
+{
+	return health;
 }
 
 bool UHealthComponent::GetIsAlive()

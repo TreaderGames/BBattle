@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "GameConfig.h"
+#include "Subsystems/GameStateSubSystem.h"
 #include "IntervalWatch.generated.h"
 
 //UDELEGATE()
@@ -26,6 +27,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	TObjectPtr<UGameConfig> gameConfig;
 
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -41,8 +43,18 @@ private:
 
 	int32 intervalIndex;
 
+	bool canTick;
+
 	AActor* owningActor;
+
+	UGameStateSubSystem* gameStateSubsystem;
 
 	void HandleNextInterval();
 	void UpdateTick(float delta);
+
+	UFUNCTION()
+	void HandleGameStateOver(bool isWin);
+
+	UFUNCTION()
+	void HandleGameStateStart();
 };
