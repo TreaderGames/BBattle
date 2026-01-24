@@ -8,12 +8,8 @@
 #include "PlayerDataAsset.h"
 #include "PlayerDataSubSystem.generated.h"
 
-/*
- SetInterval(AbilityData data, int index);
-GetInterval(int index)
-TArray<AbilityData> abilityArr;
-TArray<AbilityData> defaultAbilities;
- */
+UDELEGATE(BlueprintCallable)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAbilitiesUpdated);
 
 UCLASS()
 class BBATTLE_API UPlayerDataSubSystem : public UGameInstanceSubsystem
@@ -40,5 +36,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void UpdatePlayerAbilities(TArray<FAbilityData> abilityDataArr);
+
+	UPROPERTY(EditAnywhere, BlueprintAssignable);
+	FOnAbilitiesUpdated OnAbilitiesUpdated;
 
 };

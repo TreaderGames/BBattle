@@ -66,4 +66,6 @@ void UPlayerDataSubSystem::UpdatePlayerAbilities(TArray<FAbilityData> abilityDat
 		GEngine->AddOnScreenDebugMessage(i, 2, FColor::Blue, "Ability Type: " + enumString);
 		UE_LOG(LogTemp, Error, TEXT("Ability Type: %s"), *enumString);
 	}
+
+	OnAbilitiesUpdated.Broadcast();
 }
