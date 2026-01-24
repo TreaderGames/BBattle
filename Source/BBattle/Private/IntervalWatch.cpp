@@ -83,6 +83,6 @@ void UIntervalWatch::HandleNextInterval()
 {
 	GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "Interval Index " + FString::FromInt(intervalIndex));
 
-	OnNextInterval.ExecuteIfBound(intervalIndex);
+	OnNextInterval.Broadcast(intervalIndex);
 }
 

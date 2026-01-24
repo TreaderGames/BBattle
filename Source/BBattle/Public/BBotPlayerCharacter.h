@@ -36,15 +36,17 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Custom Component");
 	class UMovementActorComponent* movementComponent;
 
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability");
+	class UIntervalWatch* intervalWatch;
+
+
 protected:
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
 	class UInputMappingContext* inputMapping;
 
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
 	class UInputAction* moveIA;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability");
-	TObjectPtr<UIntervalWatch> intervalWatch;
 
 	TObjectPtr<UHealthComponent> healthComponent;
 

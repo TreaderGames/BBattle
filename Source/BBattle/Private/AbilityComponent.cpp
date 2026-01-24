@@ -55,7 +55,7 @@ void UAbilityComponent::InitIntervalWatch()
 	if (IsValid(intervalWatch))
 	{
 		GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "Interval Watch Found");
-		intervalWatch->OnNextInterval.BindUObject(this, &UAbilityComponent::HandleNextInterval);
+		intervalWatch->OnNextInterval.AddDynamic(this, &UAbilityComponent::HandleNextInterval);
 	}
 	else
 	{

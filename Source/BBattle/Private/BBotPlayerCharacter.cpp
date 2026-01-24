@@ -21,6 +21,8 @@ ABBotPlayerCharacter::ABBotPlayerCharacter()
 
 	movementComponent = CreateDefaultSubobject<UMovementActorComponent>(TEXT("MovementComponent"));
 	intervalWatch = CreateDefaultSubobject<UIntervalWatch>(TEXT("IntervalWatch"));
+
+	//intervalWatch = GetOwner()->FindComponentByClass<UIntervalWatch>();
 }
 
 // Called when the game starts or when spawned

@@ -8,8 +8,8 @@
 #include "Subsystems/GameStateSubSystem.h"
 #include "IntervalWatch.generated.h"
 
-//UDELEGATE()
-DECLARE_DELEGATE_OneParam(FOnNextInterval, int32)
+UDELEGATE(BlueprintCallable)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNextInterval, int32, index);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BBATTLE_API UIntervalWatch : public UActorComponent
@@ -32,6 +32,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UPROPERTY(EditAnywhere, BlueprintAssignable);
 	FOnNextInterval OnNextInterval;
 
 	void ResetValue();
