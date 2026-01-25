@@ -80,7 +80,7 @@ void UHealthComponent::DealDamage(int32 damage)
 	}
 
 	ShowAttackVFX();
-	UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);
+	//UE_LOG(LogTemp, Error, TEXT("DealDamage %d"), currentHealth);
 }
 
 int UHealthComponent::GetMaxHealth()

@@ -41,6 +41,7 @@ void ABBotEnemyPawn::UpdateEnemyData(FEnemyData enemyData)
 	UEnemyAbilityComponent* enemyAbilityComp = GetComponentByClass<UEnemyAbilityComponent>();
 
 	enemyAbilityComp->InitAbilities(enemyData);
+	OnEnemyDataUpdated.Broadcast(enemyData);
 }
 
 FOnDefeated* ABBotEnemyPawn::GetOnDefeated()

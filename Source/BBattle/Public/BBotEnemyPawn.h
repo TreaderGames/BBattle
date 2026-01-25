@@ -9,6 +9,8 @@
 #include <HealthComponent.h>
 #include "BBotEnemyPawn.generated.h"
 
+UDELEGATE(BlueprintCallable)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyDataUpdated, FEnemyData, enemyData);
 
 UCLASS()
 class BBATTLE_API ABBotEnemyPawn : public ADefaultPawn
@@ -40,4 +42,7 @@ public:
 	FOnDefeated* GetOnDefeated();
 
 	void ClearBeforeDestroy();
+
+	UPROPERTY(EditAnywhere, BlueprintAssignable)
+	FOnEnemyDataUpdated OnEnemyDataUpdated;
 };
