@@ -20,6 +20,13 @@ void ABBotEnemyPawn::BeginPlay()
 	Super::BeginPlay();
 
 	healthComponent = GetComponentByClass<UHealthComponent>();
+
+	healthComponent->OnDefeated.BindUObject(this, &ABBotEnemyPawn::HandleDefeated);
+}
+
+void ABBotEnemyPawn::HandleDefeated()
+{
+	Cast<UStaticMeshComponent>(GetComponentByClass(UStaticMeshComponent::StaticClass()))->SetVisibility(false, true);
 }
 
 // Called every frame
@@ -46,7 +53,7 @@ void ABBotEnemyPawn::UpdateEnemyData(FEnemyData enemyData)
 
 FOnDefeated* ABBotEnemyPawn::GetOnDefeated()
 {
-	//UE_LOG(LogTemp, Error, TEXT("RegisterDefeat"));
+	UE_LOG(LogTemp, Error, TEXT("RegisterDefeat"));
 	return &healthComponent->OnDefeated;// .BindUObject(uobject, &ULevelSubSystem::HandleEnemyDefeated);
 }
 

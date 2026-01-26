@@ -43,7 +43,10 @@ void ABBotPlayerCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	Look();
-
+	/*if (PC->IsInputKeyDown(EKeys::SpaceBar))
+	{
+		Look();
+	}*/
 	/*if (PC) //Testing only
 	{
 		bool bIsSpaceBarDown = PC->IsInputKeyDown(EKeys::SpaceBar);

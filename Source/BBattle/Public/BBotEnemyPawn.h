@@ -30,6 +30,8 @@ protected:
 
 	TObjectPtr<UHealthComponent> healthComponent;
 
+	void HandleDefeated();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
