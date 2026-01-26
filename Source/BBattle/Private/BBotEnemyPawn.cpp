@@ -18,15 +18,21 @@ ABBotEnemyPawn::ABBotEnemyPawn()
 void ABBotEnemyPawn::BeginPlay()
 {
 	Super::BeginPlay();
-
+	//UE_LOG(LogTemp, Error, TEXT("HandleDefeated BeginPlay"));
 	healthComponent = GetComponentByClass<UHealthComponent>();
-
-	healthComponent->OnDefeated.BindUObject(this, &ABBotEnemyPawn::HandleDefeated);
+	FOnDefeated* onDefeated = GetOnDefeated();
+	onDefeated->AddDynamic(this, &ABBotEnemyPawn::HandleDefeated);
 }
 
 void ABBotEnemyPawn::HandleDefeated()
 {
-	UE_LOG(LogTemp, Error, TEXT("HandleDefeated"));
+	//UE_LOG(LogTemp, Error, TEXT("HandleDefeated"));
+	FTimerHandle UnusedHandle;
+	GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABBotEnemyPawn::DelayedHide, 2.0f, false);
+}
+
+void ABBotEnemyPawn::DelayedHide()
+{
 	Cast<UStaticMeshComponent>(GetComponentByClass(UStaticMeshComponent::StaticClass()))->SetVisibility(false, true);
 }
 
@@ -54,7 +60,7 @@ void ABBotEnemyPawn::UpdateEnemyData(FEnemyData enemyData)
 
 FOnDefeated* ABBotEnemyPawn::GetOnDefeated()
 {
-	UE_LOG(LogTemp, Error, TEXT("RegisterDefeat"));
+	//UE_LOG(LogTemp, Error, TEXT("RegisterDefeat"));
 	return &healthComponent->OnDefeated;// .BindUObject(uobject, &ULevelSubSystem::HandleEnemyDefeated);
 }
 

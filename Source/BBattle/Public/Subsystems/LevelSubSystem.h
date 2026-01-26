@@ -48,6 +48,7 @@ protected:
 
 	void ClearEnemies();
 
+	UFUNCTION()
 	void HandleEnemyDefeated();
 
 	UFUNCTION()

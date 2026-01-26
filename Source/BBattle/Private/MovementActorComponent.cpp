@@ -25,7 +25,7 @@ void UMovementActorComponent::BeginPlay()
 	controller = pawn->GetController();
 	healthComponent = GetOwner()->GetComponentByClass<UHealthComponent>();
 
-	UE_LOG(LogTemp, Error, TEXT("pawn %s"), *pawn->GetFName().ToString());
+	//UE_LOG(LogTemp, Error, TEXT("pawn %s"), *pawn->GetFName().ToString());
 
 	if (IsValid(controller))
 	{

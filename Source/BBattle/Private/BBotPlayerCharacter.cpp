@@ -34,7 +34,7 @@ void ABBotPlayerCharacter::BeginPlay()
 	UpdateResetableComponent();
 	healthComponent = GetComponentByClass<UHealthComponent>();
 
-	healthComponent->OnDefeated.BindUObject(this, &ABBotPlayerCharacter::HandleDefeat);
+	healthComponent->OnDefeated.AddDynamic(this, &ABBotPlayerCharacter::HandleDefeat);
 }
 
 // Called every frame

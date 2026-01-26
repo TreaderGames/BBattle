@@ -25,12 +25,12 @@ void UAbilityComponentBase::BeginPlay()
 
 	GetOwner()->GetComponents<UAbilityBase>(abilityBaseCollection);
 
-	GEngine->AddOnScreenDebugMessage(-6, 4, FColor::White, "abilityBaseCollection count " + FString::FromInt(abilityBaseCollection.Num()));
+	//GEngine->AddOnScreenDebugMessage(-6, 4, FColor::White, "abilityBaseCollection count " + FString::FromInt(abilityBaseCollection.Num()));
 }
 
 void UAbilityComponentBase::HandleNextInterval(int32 index)
 {
-	GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "UAbilityComponent Interval Index " + FString::FromInt(index));
+	//GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "UAbilityComponent Interval Index " + FString::FromInt(index));
 }
 
 void UAbilityComponentBase::InitIntervalWatch()
@@ -40,7 +40,7 @@ void UAbilityComponentBase::InitIntervalWatch()
 	if (IsValid(intervalWatch))
 	{
 		GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "Interval Watch Found");
-		UE_LOG(LogTemp,Error, TEXT("Interval Watch Found"))
+		//UE_LOG(LogTemp,Error, TEXT("Interval Watch Found"))
 		intervalWatch->OnNextInterval.AddDynamic(this, &UAbilityComponentBase::HandleNextInterval);
 	}
 	else

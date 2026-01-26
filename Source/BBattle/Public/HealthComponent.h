@@ -10,7 +10,7 @@
 #include "HealthComponent.generated.h"
 
 //UDELEGATE()
-DECLARE_DELEGATE(FOnDefeated);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDefeated);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDamageTaken, int32, healthValue);
 

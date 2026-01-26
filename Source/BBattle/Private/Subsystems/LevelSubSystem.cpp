@@ -46,7 +46,7 @@ void ULevelSubSystem::SpawnEnemies()
 		enemyBots.Add(enemyActor);
 
 		FOnDefeated* onDefeated = enemyActor->GetOnDefeated();
-		onDefeated->BindUObject(this, &ULevelSubSystem::HandleEnemyDefeated);
+		onDefeated->AddDynamic(this, &ULevelSubSystem::HandleEnemyDefeated);
 
 		enemySpawnPointsTemp.RemoveAt(randomIndex);
 		//UE_LOG(LogTemp, Error, TEXT("SpawnEnemies: %s _ %s"), *FString::FromInt(enemySpawnPointsTemp.Num()), *FString::FromInt(enemySpawnPoints.Num()));
@@ -106,7 +106,7 @@ void ULevelSubSystem::ClearEnemies()
 void ULevelSubSystem::HandleEnemyDefeated()
 {
 	defeatedEnemyCount++;
-	UE_LOG(LogTemp, Error, TEXT("HandleEnemyDefeated"));
+	//UE_LOG(LogTemp, Error, TEXT("HandleEnemyDefeated"));
 	if (defeatedEnemyCount >= GetCurrentLevelData().enemyDataArr.Num())
 	{
 		UGameStateSubSystem* gameStateSubSystem = GetWorld()->GetGameInstance()->GetSubsystem<UGameStateSubSystem>();
@@ -117,7 +117,7 @@ void ULevelSubSystem::HandleEnemyDefeated()
 
 void ULevelSubSystem::HandleLevelWin(bool isWin)
 {
-	UE_LOG(LogTemp, Error, TEXT("HandleLevelWin"));
+	//UE_LOG(LogTemp, Error, TEXT("HandleLevelWin"));
 	if (isWin) {
 		currentLevel++;
 

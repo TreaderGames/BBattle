@@ -58,7 +58,7 @@ protected:
 
 	void UpdateResetableComponent();
 
-
+	UFUNCTION()
 	void HandleDefeat();
 
 	APlayerController* PC;
