@@ -30,6 +30,7 @@ protected:
 
 	TObjectPtr<UHealthComponent> healthComponent;
 
+	UFUNCTION()
 	void HandleDefeated();
 
 public:	

@@ -26,6 +26,7 @@ void ABBotEnemyPawn::BeginPlay()
 
 void ABBotEnemyPawn::HandleDefeated()
 {
+	UE_LOG(LogTemp, Error, TEXT("HandleDefeated"));
 	Cast<UStaticMeshComponent>(GetComponentByClass(UStaticMeshComponent::StaticClass()))->SetVisibility(false, true);
 }
 
