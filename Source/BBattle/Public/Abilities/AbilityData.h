@@ -8,7 +8,8 @@ UENUM(BlueprintType)
 enum class EAbilityType : uint8
 {
 	None UMETA(DisplayName = "None"),
-	BasicAttack UMETA(DisplayName = "Basic Attack")
+	BasicAttack UMETA(DisplayName = "Basic Attack"),
+	Block UMETA(DisplayName = "Block")
 };
 
 USTRUCT(BlueprintType)
