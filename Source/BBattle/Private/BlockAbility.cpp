@@ -31,16 +31,30 @@ void UBlockAbility::ToggleSheild(bool value)
 	{
 		allColliders[i]->SetCollisionProfileName(value ? inactivePreset : activePreset, true);
 	}
+
+	if (IsValid(shield))
+	{
+		shield->SetVisibility(value);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("UBlockAbility shield not valid"));
+	}
 }
 
 void UBlockAbility::InitReferences()
 {
 	GetOwner()->GetComponents<UShapeComponent>(allColliders);
 
-	/*for (int32 i = 0; i < allColliders.Num(); i++)
+	for (int32 i = 0; i < allColliders.Num(); i++)
 	{
 		UE_LOG(LogTemp, Error, TEXT("UBlockAbility allColliders name %s"), *allColliders[i]->GetFName().ToString());
 	}
 
-	UE_LOG(LogTemp, Error, TEXT("UBlockAbility allColliders length %s"), *FString::FromInt(allColliders.Num()));*/
+	UE_LOG(LogTemp, Error, TEXT("UBlockAbility allColliders length %s"), *FString::FromInt(allColliders.Num()));
+}
+
+void UBlockAbility::SetShieldMesh(UStaticMeshComponent* mesh)
+{
+	shield = mesh;
 }

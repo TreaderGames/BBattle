@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilityBase.h"
 #include "Components/ShapeComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "BlockAbility.generated.h"
 
 /**
@@ -29,15 +30,18 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Ability")
 	FName activePreset;
 
-	TInlineComponentArray<UShapeComponent*> allColliders;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability")
+	UStaticMeshComponent* shield;
 
-	UPROPERTY(VisibleAnywhere, Category = "Ability")
-	UActorComponent* shield;
+	TInlineComponentArray<UShapeComponent*> allColliders;
 
 	bool isShieldActive;
 
 	void ToggleSheild(bool value);
 
 	void InitReferences();
+
+	UFUNCTION(BlueprintCallable)
+	void SetShieldMesh(UStaticMeshComponent* mesh);
 
 };
