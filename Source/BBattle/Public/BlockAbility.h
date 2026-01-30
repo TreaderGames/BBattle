@@ -44,4 +44,7 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void SetShieldMesh(UStaticMeshComponent* mesh);
 
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	TObjectPtr<USoundBase> shieldActivateSFX;
+
 };

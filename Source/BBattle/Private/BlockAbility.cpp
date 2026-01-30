@@ -2,6 +2,7 @@
 
 
 #include "BlockAbility.h"
+#include <Kismet/GameplayStatics.h>
 
 void UBlockAbility::TriggerAbility(FAbilityData abilityData)
 {
@@ -35,6 +36,11 @@ void UBlockAbility::ToggleSheild(bool value)
 	if (IsValid(shield))
 	{
 		shield->SetVisibility(value);
+
+		if (value && IsValid(shieldActivateSFX))
+		{
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), shieldActivateSFX, shield->GetComponentLocation());
+		}
 	}
 	else
 	{
