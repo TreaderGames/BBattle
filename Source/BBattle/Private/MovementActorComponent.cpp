@@ -3,6 +3,7 @@
 #include "HealthComponent.h"
 #include "MovementActorComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include <Kismet/GameplayStatics.h>
 
 // Sets default values for this component's properties
 UMovementActorComponent::UMovementActorComponent()
@@ -105,10 +106,17 @@ void UMovementActorComponent::LookRotate(FVector forward)
 	targetRotation.Pitch = 0.f;
 	targetRotation.Roll = 0.f;
 
+	FRotator currentRotation = pawn->GetActorRotation();
+	currentRotation.Pitch = 0.f;
+	currentRotation.Roll = 0.f;
+
+	FRotator newRotation = UKismetMathLibrary::RInterpTo(currentRotation, targetRotation, UGameplayStatics::GetWorldDeltaSeconds(this), rotationSpeed);
+
+
 	if (pawn)
 	{
 		//UE_LOG(LogTemp, Error, TEXT("LookRotate %s"), *targetRotation.ToString());
-		pawn->SetActorRotation(targetRotation); //SetControlRotation(targetRotation);
+		pawn->SetActorRotation(newRotation); //SetControlRotation(targetRotation);
 	}
 }
 

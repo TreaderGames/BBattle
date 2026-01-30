@@ -24,6 +24,9 @@ protected:
 	void LookRotate(FVector forward);
 	void DoMove(FVector2D value);
 
+	UPROPERTY(EditDefaultsOnly, Category = "Ability")
+	float rotationSpeed;
+
 	AController* controller;
 	APawn* pawn;
 
