@@ -39,6 +39,7 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
         return;
     }
     UHealthComponent* healthComponent;
+    UKnockbackComponent* knockbackComponent;
 
 	FVector traceStart = hitStart->GetComponentLocation();
 	FVector traceEnd = traceStart + hitStart->GetForwardVector() * range;
@@ -73,11 +74,16 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
             *hit.ImpactPoint.ToString());*/
 
         healthComponent = hit.GetActor()->GetComponentByClass<UHealthComponent>();
+        knockbackComponent = hit.GetActor()->GetComponentByClass<UKnockbackComponent>();
 
         if (IsValid(healthComponent))
         {
             //UE_LOG(LogTemp, Error, TEXT("Deal damage"));
             healthComponent->DealDamage(damage);
+
+            if (IsValid(knockbackComponent)) {
+                knockbackComponent->DoKnockBack(hitStart->GetForwardVector(), knockbackForce, knockbackDuration);
+            }
 
             if (IsValid(hitSFX))
             {

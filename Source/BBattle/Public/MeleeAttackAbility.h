@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilityBase.h"
 #include "AnimationComponent.h"
+#include "KnockbackComponent.h"
 #include "MeleeAttackAbility.generated.h"
 /**
  * 
@@ -38,6 +39,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Ability")
 	int32 range;
+
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	int32 knockbackForce;
+
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	float knockbackDuration;
 
 	UPROPERTY(EditAnywhere, Category = "Ability")
 	AnimationKey animKey;
