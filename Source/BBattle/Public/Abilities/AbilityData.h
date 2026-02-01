@@ -32,5 +32,8 @@ struct FAbilityData
 	UTexture2D* icon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
+	FLinearColor cardTint;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability");
 	int32 value;
 };
