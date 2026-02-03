@@ -76,6 +76,7 @@ void UIntervalWatch::HandleGameStateStart()
 {
 	canTick = true;
 	intervalIndex = 0;
+	ResetValue();
 }
 
 
