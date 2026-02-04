@@ -9,7 +9,9 @@ enum class EAbilityType : uint8
 {
 	None UMETA(DisplayName = "None"),
 	BasicAttack UMETA(DisplayName = "Basic Attack"),
-	Block UMETA(DisplayName = "Block")
+	Block UMETA(DisplayName = "Block"),
+	Dash UMETA(DisplayName = "Dash"),
+	Slash UMETA(DisplayName = "Slash")
 };
 
 USTRUCT(BlueprintType)
