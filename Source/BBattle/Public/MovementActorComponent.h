@@ -22,7 +22,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	void LookRotate(FVector forward);
-	void DoMove(FVector2D value);
+	void DoMove(FVector2D value, float speed);
 
 	UPROPERTY(EditDefaultsOnly, Category = "Ability")
 	float rotationSpeed;
@@ -36,7 +36,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void Move(FVector2D inputVector);
+	void Move(FVector2D inputVector, float speed);
 
 	void MoveTowards(FVector inputVector, float speed, double distThreshold);
 

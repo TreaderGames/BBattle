@@ -50,12 +50,12 @@ void UMovementActorComponent::TickComponent(float DeltaTime, ELevelTick TickType
 
 #pragma region Public
 
-void UMovementActorComponent::Move(FVector2D inputVector)
+void UMovementActorComponent::Move(FVector2D inputVector, float speed)
 {
 
 	if (IsValid(controller) && IsValid(healthComponent) && healthComponent->GetIsAlive())
 	{
-		DoMove(inputVector);
+		DoMove(inputVector, speed);
 	}
 }
 
@@ -120,16 +120,16 @@ void UMovementActorComponent::LookRotate(FVector forward)
 	}
 }
 
-void UMovementActorComponent::DoMove(FVector2D value)
+void UMovementActorComponent::DoMove(FVector2D value, float speed)
 {
 	//const FRotator rotation = Controller->GetControlRotation();
 	//const FRotator yawRotation(0, rotation.Yaw, 0);
-	//GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "value " + value.ToString());
+	GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "value " + value.ToString());
 	const FVector forwardDir = FVector::ForwardVector;//FRotationMatrix(yawRotation).GetUnitAxis(EAxis::X);
 	const FVector rightDir = FVector::RightVector;//FRotationMatrix(yawRotation).GetUnitAxis(EAxis::Y);
 
-	pawn->AddMovementInput(forwardDir, value.Y);
-	pawn->AddMovementInput(rightDir, value.X);
+	pawn->AddMovementInput(forwardDir, value.Y * speed);
+	pawn->AddMovementInput(rightDir, value.X * speed);
 }
 #pragma endregion
 

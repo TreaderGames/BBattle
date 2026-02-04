@@ -87,7 +87,7 @@ void ABBotPlayerCharacter::Move(const FInputActionValue& value)
 	if (IsValid(movementComponent))
 	{
 		FVector2D inputVector = value.Get<FVector2D>();
-		movementComponent->Move(inputVector);
+		movementComponent->Move(inputVector, speed);
 		//GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "Move Move " + mousePos.ToString());
 	}
 	//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, "Move 2"+ mousePos.ToString());

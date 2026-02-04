@@ -48,6 +48,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
 	class UInputAction* moveIA;
 
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput");
+	float speed;
+
 	TObjectPtr<UHealthComponent> healthComponent;
 
 	TArray<IResetable*> allResetableComponents;
