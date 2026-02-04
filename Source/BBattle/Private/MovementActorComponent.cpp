@@ -124,7 +124,7 @@ void UMovementActorComponent::DoMove(FVector2D value, float speed)
 {
 	//const FRotator rotation = Controller->GetControlRotation();
 	//const FRotator yawRotation(0, rotation.Yaw, 0);
-	GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "value " + value.ToString());
+	//GEngine->AddOnScreenDebugMessage(-3, 1, FColor::Blue, "value " + value.ToString());
 	const FVector forwardDir = FVector::ForwardVector;//FRotationMatrix(yawRotation).GetUnitAxis(EAxis::X);
 	const FVector rightDir = FVector::RightVector;//FRotationMatrix(yawRotation).GetUnitAxis(EAxis::Y);
 
