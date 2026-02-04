@@ -30,5 +30,8 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Ability")
 	float knockbackDuration;
 
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	TObjectPtr<USoundBase> dashSFX;
+
 	void DoDash();
 };

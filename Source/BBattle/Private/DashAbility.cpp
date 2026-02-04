@@ -2,6 +2,7 @@
 
 
 #include "DashAbility.h"
+#include <Kismet/GameplayStatics.h>
 
 void UDashAbility::TriggerAbility(FAbilityData abilityData)
 {
@@ -19,4 +20,6 @@ void UDashAbility::BeginPlay()
 void UDashAbility::DoDash()
 {
 	knockbackComponent->DoKnockBack(GetOwner()->GetActorForwardVector(), knockbackForce, knockbackDuration);
+
+	UGameplayStatics::PlaySoundAtLocation(GetWorld(), dashSFX, GetOwner()->GetActorLocation());
 }
