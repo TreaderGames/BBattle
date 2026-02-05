@@ -12,7 +12,7 @@ FAbilityData UPlayerDataSubSystem::GetInterval(int index)
 {
 	if (abilityArr.Num() > index)
 	{
-		GEngine->AddOnScreenDebugMessage(-6, 5, FColor::Blue, "GetInterval Interval Index " + FString::FromInt(index));
+		//GEngine->AddOnScreenDebugMessage(-6, 5, FColor::Blue, "GetInterval Interval Index " + FString::FromInt(index));
 		return abilityArr[index];
 	}
 
@@ -45,8 +45,8 @@ void UPlayerDataSubSystem::DebugFunction()
 	for (int32 i = 0; i != abilityArr.Num(); ++i)
 	{
 		enumString = enumPtr->GetNameStringByValue(static_cast<int32>(abilityArr[i].abilityType));
-		GEngine->AddOnScreenDebugMessage(i, 2, FColor::Blue, "Ability Type: " + enumString);
-		UE_LOG(LogTemp, Error, TEXT("Ability Type: %s"), *enumString);
+		//GEngine->AddOnScreenDebugMessage(i, 2, FColor::Blue, "Ability Type: " + enumString);
+		//UE_LOG(LogTemp, Error, TEXT("Ability Type: %s"), *enumString);
 	}
 }
 
@@ -63,8 +63,8 @@ void UPlayerDataSubSystem::UpdatePlayerAbilities(TArray<FAbilityData> abilityDat
 	for (int32 i = 0; i != abilityArr.Num(); ++i)
 	{
 		enumString = enumPtr->GetNameStringByValue(static_cast<int32>(abilityArr[i].abilityType));
-		GEngine->AddOnScreenDebugMessage(i, 2, FColor::Blue, "Ability Type: " + enumString);
-		UE_LOG(LogTemp, Error, TEXT("Ability Type: %s"), *enumString);
+		//GEngine->AddOnScreenDebugMessage(i, 2, FColor::Blue, "Ability Type: " + enumString);
+		//UE_LOG(LogTemp, Error, TEXT("Ability Type: %s"), *enumString);
 	}
 
 	OnAbilitiesUpdated.Broadcast();
