@@ -3,6 +3,7 @@
 #include "Components/ShapeComponent.h"
 #include "SlashAbility.h"
 #include <Kismet/GameplayStatics.h>
+#include <KnockbackComponent.h>
 
 void USlashAbility::TriggerAbility(FAbilityData abilityData)
 {
@@ -67,6 +68,11 @@ void USlashAbility::ToggleHitCollider(bool value)
 	}
 }
 
+FVector USlashAbility::GetKnockBackDirectionNormalized(AActor* otherActor)
+{
+	return otherActor->GetActorForwardVector()*-1;
+}
+
 void USlashAbility::OnAttackHitBoxBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComp, int32 otherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (otherActor != GetOwner()) {
@@ -76,11 +82,15 @@ void USlashAbility::OnAttackHitBoxBeginOverlap(UPrimitiveComponent* overlappedCo
 		{
 			healthComponents.AddUnique(healthComp);
 
+			UKnockbackComponent* knockbackComponent = otherActor->GetComponentByClass<UKnockbackComponent>();
+
 			if (hitCount != healthComponents.Num())
 			{
 				healthComp->DealDamage(damage);
 				UGameplayStatics::PlaySoundAtLocation(GetWorld(), hitSFX, otherActor->GetActorLocation());
 				hitCount = healthComponents.Num();
+
+				knockbackComponent->DoKnockBack(GetKnockBackDirectionNormalized(otherActor), knockbackForce, knockbackDuration);
 				UE_LOG(LogTemp, Error, TEXT("OnAttackHitBoxBeginOverlap"));
 			}
 		}

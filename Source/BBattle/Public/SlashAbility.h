@@ -29,6 +29,8 @@ protected:
 
 	void ToggleHitCollider(bool value);
 
+	FVector GetKnockBackDirectionNormalized(AActor* otherActor);
+
 	UAnimationComponent* animComp;
 
 	UPROPERTY(EditAnywhere, Category = "Ability")
