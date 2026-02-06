@@ -48,7 +48,7 @@ void USlashAbility::RegisterHit()
 			shapeComp->OnComponentBeginOverlap.AddDynamic(this, &USlashAbility::OnAttackHitBoxBeginOverlap);
 
 			attackHitBoxes.Add(shapeComp);
-			UE_LOG(LogTemp, Error, TEXT("RegisterHit 1"));
+			//UE_LOG(LogTemp, Error, TEXT("RegisterHit 1"));
 		}
 	}
 }
@@ -59,7 +59,7 @@ void USlashAbility::ToggleHitCollider(bool value)
 	{
 		if (value)
 		{
-			attackHitBoxes[i]->SetCollisionProfileName(FName("OverlapAll"));
+			attackHitBoxes[i]->SetCollisionProfileName(FName("OverlapIgnorePawn"));
 		}
 		else
 		{
@@ -91,7 +91,7 @@ void USlashAbility::OnAttackHitBoxBeginOverlap(UPrimitiveComponent* overlappedCo
 				hitCount = healthComponents.Num();
 
 				knockbackComponent->DoKnockBack(GetKnockBackDirectionNormalized(otherActor), knockbackForce, knockbackDuration);
-				UE_LOG(LogTemp, Error, TEXT("OnAttackHitBoxBeginOverlap"));
+				//UE_LOG(LogTemp, Error, TEXT("OnAttackHitBoxBeginOverlap"));
 			}
 		}
 	}
