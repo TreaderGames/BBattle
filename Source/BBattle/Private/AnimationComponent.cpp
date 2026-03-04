@@ -34,7 +34,7 @@ void UAnimationComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 void UAnimationComponent::PlayAnimation(AnimationKey key)
 {
-	UE_LOG(LogTemp, Error, TEXT("PlayAnimation"));
+	//UE_LOG(LogTemp, Error, TEXT("PlayAnimation"));
 	animKey = key;
 	OnAnimationPlayed.Broadcast();
 }

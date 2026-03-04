@@ -19,7 +19,7 @@ UAbilityComponent::UAbilityComponent()
 
 void UAbilityComponent::DebugNotifyTick()
 {
-	UE_LOG(LogTemp, Error, TEXT("DebugNotifyTick"));
+	//UE_LOG(LogTemp, Error, TEXT("DebugNotifyTick"));
 }
 
 

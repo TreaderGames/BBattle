@@ -10,13 +10,13 @@
 
 UMainGameInstance::UMainGameInstance()
 {
-	UE_LOG(LogTemp, Error, TEXT("UMainGameInstance Instance Constructed"));
+	//UE_LOG(LogTemp, Error, TEXT("UMainGameInstance Instance Constructed"));
 }
 
 void UMainGameInstance::Init()
 {
 	Super::Init();
-	UE_LOG(LogTemp, Error, TEXT("Game Instance Init"));
+	//UE_LOG(LogTemp, Error, TEXT("Game Instance Init"));
 	InitSubSystems();
 }
 
@@ -26,24 +26,24 @@ void UMainGameInstance::InitSubSystems()
 	UCurrencyTrackerSubsystem* currencyTracker = this->GetSubsystem<UCurrencyTrackerSubsystem>();
 	ULevelSubSystem* levelSubSystem = this->GetSubsystem<ULevelSubSystem>();
 
-	UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems"));
+	//UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems"));
 	if (IsValid(playerDataSubSystem))
 	{
-		UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems IsValid"));
+		//UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems IsValid"));
 		playerDataSubSystem->InitSubsystem(playerDataAsset);
 		GEngine->AddOnScreenDebugMessage(-2, 2, FColor::Blue, "UPlayerDataSubSystem Ready");
 	}
 
 	if (IsValid(currencyTracker))
 	{
-		UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems IsValid"));
+		//UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems IsValid"));
 		currencyTracker->InitSubsystem(gameConfig);
 		GEngine->AddOnScreenDebugMessage(-2, 2, FColor::Blue, "UCurrencyTrackerSubsystem Ready");
 	}
 
 	if (IsValid(levelSubSystem))
 	{
-		UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems IsValid"));
+		//UE_LOG(LogTemp, Error, TEXT("Game Instance InitSubSystems IsValid"));
 		levelSubSystem->InitSubsystem(levelDataAsset);
 		GEngine->AddOnScreenDebugMessage(-2, 2, FColor::Blue, "ULevelSubSystem Ready");
 	}

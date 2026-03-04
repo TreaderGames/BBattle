@@ -5,7 +5,7 @@
 
 void UGameStateSubSystem::TriggerGameOver(bool isWin)
 {
-	UE_LOG(LogTemp, Error, TEXT("TriggerGameOver %s"), isWin ? TEXT("true") : TEXT("false"));
+	//UE_LOG(LogTemp, Error, TEXT("TriggerGameOver %s"), isWin ? TEXT("true") : TEXT("false"));
 
 	if (!gameOverDone)
 	{

@@ -31,5 +31,5 @@ void UCurrencyTrackerSubsystem::InitSubsystem(UGameConfig* config)
 	gameConfig = config;
 	currencyCount = gameConfig->defaultCredits;
 
-	UE_LOG(LogTemp, Error, TEXT("InitSubsystem Credits"));
+	//UE_LOG(LogTemp, Error, TEXT("InitSubsystem Credits"));
 }

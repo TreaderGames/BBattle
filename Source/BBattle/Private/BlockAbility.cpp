@@ -44,7 +44,7 @@ void UBlockAbility::ToggleSheild(bool value)
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("UBlockAbility shield not valid"));
+		//UE_LOG(LogTemp, Error, TEXT("UBlockAbility shield not valid"));
 	}
 }
 

@@ -22,7 +22,7 @@ void UEnemyMoveComponent::BeginPlay()
 	Super::BeginPlay();
 
 	playerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-	UE_LOG(LogTemp, Error, TEXT("Player Name %s"), *playerCharacter->GetName());
+	//UE_LOG(LogTemp, Error, TEXT("Player Name %s"), *playerCharacter->GetName());
 }
 
 

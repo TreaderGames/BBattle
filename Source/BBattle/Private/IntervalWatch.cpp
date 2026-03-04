@@ -49,7 +49,7 @@ void UIntervalWatch::ResetValue()
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("Game Config not found"));
+		//UE_LOG(LogTemp, Error, TEXT("Game Config not found"));
 	}
 }
 
@@ -68,7 +68,7 @@ void UIntervalWatch::UpdateTick(float delta)
 
 void UIntervalWatch::HandleGameStateOver(bool isWin)
 {
-	UE_LOG(LogTemp, Error, TEXT("UIntervalWatch HandleGameStateOver"));
+	//UE_LOG(LogTemp, Error, TEXT("UIntervalWatch HandleGameStateOver"));
 	canTick = false;
 }
 

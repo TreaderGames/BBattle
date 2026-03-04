@@ -39,7 +39,7 @@ void USlashAbility::BeginPlay()
 void USlashAbility::RegisterHit()
 {
 	TArray<UActorComponent*> actorComponentArr = GetOwner()->GetComponentsByTag(UActorComponent::StaticClass(), armColliderTag);
-	UE_LOG(LogTemp, Error, TEXT("RegisterHit %s %s"), *FString::FromInt(actorComponentArr.Num()), *armColliderTag.ToString());
+	//UE_LOG(LogTemp, Error, TEXT("RegisterHit %s %s"), *FString::FromInt(actorComponentArr.Num()), *armColliderTag.ToString());
 	for (UActorComponent* hitBox : actorComponentArr)
 	{
 		if (hitBox)

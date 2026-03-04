@@ -33,7 +33,7 @@ void UPlayerDataSubSystem::InitSubsystem(UPlayerDataAsset* playerDataAsset)
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("playerDataAsset not found"));
+		//UE_LOG(LogTemp, Error, TEXT("playerDataAsset not found"));
 	}
 }
 
@@ -41,7 +41,7 @@ void UPlayerDataSubSystem::DebugFunction()
 {
 	const UEnum* enumPtr = StaticEnum<EAbilityType>();
 	FString enumString;
-	UE_LOG(LogTemp, Error, TEXT("Debug Function PlayerDataSubSystem"));
+	//UE_LOG(LogTemp, Error, TEXT("Debug Function PlayerDataSubSystem"));
 	for (int32 i = 0; i != abilityArr.Num(); ++i)
 	{
 		enumString = enumPtr->GetNameStringByValue(static_cast<int32>(abilityArr[i].abilityType));

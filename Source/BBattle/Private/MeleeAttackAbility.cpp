@@ -35,7 +35,7 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
 {
     if (!IsValid(hitStart))
     {
-        UE_LOG(LogTemp, Error, TEXT("trace Hit start not found"));
+        //UE_LOG(LogTemp, Error, TEXT("trace Hit start not found"));
         return;
     }
     UHealthComponent* healthComponent;
@@ -93,7 +93,7 @@ void UMeleeAttackAbility::MeleeAttackTickNotify()
     }
     else
     {
-        UE_LOG(LogTemp, Error, TEXT("No hit detected."));
+        //UE_LOG(LogTemp, Error, TEXT("No hit detected."));
     }
 }
 

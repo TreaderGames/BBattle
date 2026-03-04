@@ -45,7 +45,7 @@ void UAbilityComponentBase::InitIntervalWatch()
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("Interval not Watch Found"))
+		//UE_LOG(LogTemp, Error, TEXT("Interval not Watch Found"))
 		GEngine->AddOnScreenDebugMessage(-4, 2, FColor::Blue, "Interval Watch Not Found");
 	}
 }

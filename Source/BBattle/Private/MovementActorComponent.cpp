@@ -30,11 +30,11 @@ void UMovementActorComponent::BeginPlay()
 
 	if (IsValid(controller))
 	{
-		UE_LOG(LogTemp, Error, TEXT("controller is valid%s"), *controller->GetFName().ToString())
+		//UE_LOG(LogTemp, Error, TEXT("controller is valid%s"), *controller->GetFName().ToString())
 	}
 
 	if (IsValid(healthComponent)) {
-		UE_LOG(LogTemp, Error, TEXT("healthComponent is valid"));
+		//UE_LOG(LogTemp, Error, TEXT("healthComponent is valid"));
 	}
 }
 
