@@ -51,6 +51,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Ability")
 	TObjectPtr<USoundBase> hitSFX;
 
+	UPROPERTY(EditAnywhere, Category = "Ability")
+	bool isPlayer;
+
 	TArray<UShapeComponent*> attackHitBoxes;
 
 	TArray<UHealthComponent*> healthComponents;

@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "BBotPlayerCharacter.h"
 #include "Components/ShapeComponent.h"
 #include "SlashAbility.h"
 #include <Kismet/GameplayStatics.h>
@@ -84,7 +85,7 @@ void USlashAbility::OnAttackHitBoxBeginOverlap(UPrimitiveComponent* overlappedCo
 
 			UKnockbackComponent* knockbackComponent = otherActor->GetComponentByClass<UKnockbackComponent>();
 
-			if (hitCount != healthComponents.Num())
+			if (hitCount != healthComponents.Num() && (isPlayer || (!isPlayer && Cast<ABBotPlayerCharacter>(otherActor) != nullptr)))
 			{
 				healthComp->DealDamage(damage);
 				UGameplayStatics::PlaySoundAtLocation(GetWorld(), hitSFX, otherActor->GetActorLocation());
